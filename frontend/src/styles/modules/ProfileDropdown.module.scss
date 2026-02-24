@@ -1,23 +1,37 @@
 .profileBtn {
-  border-radius: 50%;
-  width: 38px;
-  height: 38px;
+  border-radius: 21px;
+  height: 44px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 8px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-  padding: 0;
-  background: #f97316;
-  border: none;
+  padding: 6px 10px 6px 14px;
+  background: rgba(51, 65, 85, 0.5);
+  border: 1px solid rgba(71, 85, 105, 0.5);
   cursor: pointer;
-  color: white;
-  font-weight: 600;
-  font-size: 1rem;
-  overflow: hidden;
+  color: #f1f5f9;
+  width: fit-content;
 }
 
 .profileBtn:hover {
-  background: #ea580c;
+  background: rgba(71, 85, 105, 0.5);
+}
+
+.hamburgerIcon {
+  flex-shrink: 0;
+  color: #f1f5f9;
+}
+
+.avatarCircle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f97316;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 .profileImg {
@@ -34,5 +48,63 @@
   width: 100%;
   height: 100%;
   font-weight: 600;
+  font-size: 0.95rem;
   color: white;
+}
+
+.dropdownWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 4px;
+  min-width: 220px;
+  background: #1e293b;
+  border: 1px solid rgba(71, 85, 105, 0.5);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  padding: 8px 0;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dropdownLabel {
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  border-bottom: 1px solid rgba(71, 85, 105, 0.5);
+  margin-bottom: 4px;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  color: #f1f5f9;
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.dropdownItem:hover {
+  background: rgba(51, 65, 85, 0.6);
+}
+
+.dropdownItemDanger {
+  color: #f87171;
+}
+
+.dropdownItemDanger:hover {
+  background: rgba(248, 113, 113, 0.15);
 }

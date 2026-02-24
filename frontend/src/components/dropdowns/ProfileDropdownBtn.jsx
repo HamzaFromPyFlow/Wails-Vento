@@ -1,6 +1,8 @@
-import { Menu } from '@mantine/core';
+import { useState, useRef, useEffect } from 'react';
 import { BsRecordCircle } from 'react-icons/bs';
+import { HiOutlineMenu } from 'react-icons/hi';
 import { IoExitOutline, IoSettingsOutline, IoDiamondOutline } from 'react-icons/io5';
+import { MdAttachMoney } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../stores/authStore';
 import { isUserFreePlan } from '../../lib/payment-helper';
@@ -13,14 +15,38 @@ function getInitial(name, email) {
 }
 
 export default function ProfileDropdownBtn() {
+  const [opened, setOpened] = useState(false);
+  const containerRef = useRef(null);
   const { ventoUser, signOut } = useAuth();
   const navigate = useNavigate();
   const initial = getInitial(ventoUser?.displayName || ventoUser?.name, ventoUser?.email);
 
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (containerRef.current && !containerRef.current.contains(e.target)) {
+        setOpened(false);
+      }
+    };
+    if (opened) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [opened]);
+
+  const handleItemClick = async (fn) => {
+    setOpened(false);
+    await fn();
+  };
+
   return (
-    <Menu trigger="hover" shadow="md" radius="md">
-      <Menu.Target>
-        <button className={styles.profileBtn}>
+    <div ref={containerRef} className={styles.dropdownWrapper}>
+      <button
+        className={styles.profileBtn}
+        type="button"
+        onClick={() => setOpened((o) => !o)}
+      >
+        <HiOutlineMenu size={22} className={styles.hamburgerIcon} />
+        <span className={styles.avatarCircle}>
           {ventoUser?.profilePhotoUrl ? (
             <img
               alt="user profile"
@@ -34,33 +60,60 @@ export default function ProfileDropdownBtn() {
           ) : (
             <span className={styles.avatarInitial}>{initial}</span>
           )}
-        </button>
-      </Menu.Target>
-      <Menu.Dropdown>
-        <Menu.Label>{ventoUser?.displayName || ventoUser?.name || ventoUser?.email || 'User'}</Menu.Label>
-        <Menu.Item
-          icon={<BsRecordCircle size={14} />}
-          onClick={() => navigate('/recordings')}
-        >
-          View Recordings
-        </Menu.Item>
-        <Menu.Item
-          icon={<IoSettingsOutline size={14} />}
-          onClick={() => navigate('/profile')}
-        >
-          Account and settings
-        </Menu.Item>
-        <Menu.Item
-          icon={<IoDiamondOutline size={14} />}
-          style={isUserFreePlan(ventoUser) ? { backgroundColor: 'rgba(254, 237, 120, 0.2)' } : {}}
-          onClick={() => navigate('/pricing')}
-        >
-          Plans and Pricing
-        </Menu.Item>
-        <Menu.Item icon={<IoExitOutline size={14} />} onClick={signOut} color="red">
-          Log Out
-        </Menu.Item>
-      </Menu.Dropdown>
-    </Menu>
+        </span>
+      </button>
+
+      {opened && (
+        <div className={styles.dropdown}>
+          <div className={styles.dropdownLabel}>
+            {ventoUser?.displayName || ventoUser?.name || ventoUser?.email || 'User'}
+          </div>
+          {/* <button
+            type="button"
+            className={styles.dropdownItem}
+            onClick={() => handleItemClick(() => navigate('/recordings'))}
+          >
+            <BsRecordCircle size={14} />
+            <span>View Recordings</span>
+          </button>
+          <button
+            type="button"
+            className={styles.dropdownItem}
+            onClick={() => handleItemClick(() => navigate('/profile'))}
+          >
+            <IoSettingsOutline size={14} />
+            <span>Account and settings</span>
+          </button>
+          <button
+            type="button"
+            className={styles.dropdownItem}
+            onClick={() => handleItemClick(() => window.open('https://billing.stripe.com', '_blank'))}
+          >
+            <MdAttachMoney size={14} />
+            <span>Billing</span>
+          </button>
+          <button
+            type="button"
+            className={styles.dropdownItem}
+            onClick={() => handleItemClick(() => navigate('/pricing'))}
+            style={isUserFreePlan(ventoUser) ? { backgroundColor: 'rgba(254, 237, 120, 0.2)' } : {}}
+          >
+            <IoDiamondOutline size={14} />
+            <span>Plans and Pricing</span>
+          </button> */}
+          <button
+            type="button"
+            className={`${styles.dropdownItem} ${styles.dropdownItemDanger}`}
+            onClick={() => handleItemClick(async () => {
+              await signOut();
+              navigate('/');
+            })}
+          >
+            <IoExitOutline size={14} />
+            <span>Log Out</span>
+          </button>
+        </div>
+      )}
+    </div>
   );
 }

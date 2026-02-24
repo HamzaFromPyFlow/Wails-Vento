@@ -1,9 +1,5 @@
 import { useState } from 'react';
 import { useLocation, Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { HiOutlineMenu } from 'react-icons/hi';
-import { Menu } from '@mantine/core';
-import { BsRecordCircle } from 'react-icons/bs';
-import { IoSettingsOutline, IoDiamondOutline } from 'react-icons/io5';
 import { isBrowser, isSupportedBrowser } from '../../lib/helper-pure';
 import { generateUrl } from '../../lib/helper-pure';
 import { useRedirectAuthUrl, useSignUpRedirectAuthUrl } from '../../lib/hooks';
@@ -114,36 +110,7 @@ export default function Header({
                   </Link>
                 </div>
               ) : (
-                <>
-                  <Menu shadow="md" radius="md">
-                    <Menu.Target>
-                      <button className={styles.hamburgerBtn} aria-label="Menu">
-                        <HiOutlineMenu size={22} />
-                      </button>
-                    </Menu.Target>
-                    <Menu.Dropdown>
-                      <Menu.Item
-                        leftSection={<BsRecordCircle size={14} />}
-                        onClick={() => navigate('/recordings')}
-                      >
-                        Recordings
-                      </Menu.Item>
-                      <Menu.Item
-                        leftSection={<IoSettingsOutline size={14} />}
-                        onClick={() => navigate('/profile')}
-                      >
-                        Account and settings
-                      </Menu.Item>
-                      <Menu.Item
-                        leftSection={<IoDiamondOutline size={14} />}
-                        onClick={() => navigate('/pricing')}
-                      >
-                        Plans and Pricing
-                      </Menu.Item>
-                    </Menu.Dropdown>
-                  </Menu>
-                  <ProfileDropdownBtn />
-                </>
+                <ProfileDropdownBtn />
               )}
             </>
           )}

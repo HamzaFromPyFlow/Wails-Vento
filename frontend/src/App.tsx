@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { MantineProvider } from "@mantine/core";
 import { onAuthStateChanged, type Auth } from "firebase/auth";
 import * as firebaseLib from "./lib/firebase";
@@ -25,6 +25,15 @@ function HomeOrRedirect() {
   const ventoUser = useAuth((s) => s.ventoUser);
   if (ventoUser) return <Navigate to="/recordings" replace />;
   return <Landing />;
+}
+
+function RequireAuth({ children }: { children: React.ReactNode }) {
+  const ventoUser = useAuth((s) => s.ventoUser);
+  const location = useLocation();
+  if (!ventoUser) {
+    return <Navigate to="/" replace state={{ from: location }} />;
+  }
+  return <>{children}</>;
 }
 
 function App() {
@@ -68,11 +77,11 @@ function App() {
           <Route path="/auth/action" element={<AuthActionPage />} />
           <Route path="/auth/invitation-expired" element={<InvitationExpiredPage />} />
           <Route path="/auth/beta-no-access" element={<BetaNoAccessPage />} />
-          <Route path="/recordings" element={<RecordingsPage />} />
-          <Route path="/recordings/folder/:folderId" element={<FolderPage />} />
-          <Route path="/view/:id" element={<ViewRecording />} />
-          <Route path="/record/new" element={<RecordNew />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/recordings" element={<RequireAuth><RecordingsPage /></RequireAuth>} />
+          <Route path="/recordings/folder/:folderId" element={<RequireAuth><FolderPage /></RequireAuth>} />
+          <Route path="/view/:id" element={<RequireAuth><ViewRecording /></RequireAuth>} />
+          <Route path="/record/new" element={<RequireAuth><RecordNew /></RequireAuth>} />
+          <Route path="/profile" element={<RequireAuth><Profile /></RequireAuth>} />
           <Route path="/pricing" element={<Navigate to="/" replace />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
