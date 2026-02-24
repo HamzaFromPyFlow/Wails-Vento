@@ -6,6 +6,7 @@ import (
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
 	"github.com/wailsapp/wails/v2/pkg/options/assetserver"
+	"github.com/wailsapp/wails/v2/pkg/options/mac"
 )
 
 //go:embed all:frontend/dist
@@ -17,9 +18,13 @@ func main() {
 
 	// Create application with options
 	err := wails.Run(&options.App{
-		Title:  "wails-vento",
-		Width:  1024,
-		Height: 768,
+		Title:            "wails-vento",
+		Width:            1024,
+		Height:           768,
+		WindowStartState: options.Maximised,
+		Mac: &mac.Options{
+			DisableZoom: false, // Enable the green maximize/zoom button
+		},
 		AssetServer: &assetserver.Options{
 			Assets: assets,
 		},
