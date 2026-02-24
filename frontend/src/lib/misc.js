@@ -26,3 +26,18 @@ export function convertToRecordingModalItem(recording, _ventoUser) {
     recordingTimeStr: formatDateSince(new Date(recording.createdAt || Date.now())),
   };
 }
+
+export function stopAllTracks(mediaStream) {
+  if (!mediaStream?.getTracks) return;
+  mediaStream.getTracks().forEach((track) => track.stop());
+}
+
+export function errorHandler(handler) {
+  return (...args) => {
+    try {
+      return handler(...args);
+    } catch (e) {
+      console.error('[errorHandler]', e);
+    }
+  };
+}

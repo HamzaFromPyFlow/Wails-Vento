@@ -1,0 +1,48 @@
+.wrapper {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.prompt {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: #94a3b8;
+  text-align: center;
+}
+
+.inputSettingsWrap {
+  margin-bottom: 1rem;
+}
+
+.toolbarWrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.startBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: #67e997;
+  color: #020617;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+  &:hover:not(:disabled) {
+    background: #4ade80;
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}

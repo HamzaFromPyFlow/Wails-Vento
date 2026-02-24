@@ -1,0 +1,150 @@
+.container {
+  border-radius: 1rem;
+  border: 1px solid rgba(71, 85, 105, 0.5);
+  background: rgba(30, 41, 59, 0.5);
+  padding: 1rem;
+}
+
+.tabsList {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 0.75rem;
+}
+
+.tabLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.preview {
+  position: relative;
+  min-height: 320px;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(71, 85, 105, 0.5);
+  overflow: hidden;
+  background: #0f172a;
+}
+
+.cameraPreview {
+  position: absolute;
+  inset: 0;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  font-size: 0.875rem;
+}
+
+.screenPlaceholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: linear-gradient(transparent, rgba(15, 23, 42, 0.9));
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.icon {
+  flex-shrink: 0;
+  color: #94a3b8;
+}
+
+.select {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(71, 85, 105, 0.5);
+  background: rgba(30, 41, 59, 0.8);
+  color: #f1f5f9;
+  font-size: 0.875rem;
+}
+
+.cameraDeniedRow {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+
+.allowBtn {
+  padding: 0.35rem 0.75rem;
+  border-radius: 0.375rem;
+  border: none;
+  background: #67e997;
+  color: #020617;
+  font-weight: 500;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.allowBtn:hover {
+  background: #4ade80;
+}
+
+.label {
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+
+.actions {
+  margin-top: 0.5rem;
+}
+
+.footer {
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.settingsBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(71, 85, 105, 0.5);
+  background: rgba(51, 65, 85, 0.5);
+  color: #f1f5f9;
+  font-size: 0.875rem;
+  cursor: pointer;
+}

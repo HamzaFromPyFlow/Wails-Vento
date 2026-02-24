@@ -1,0 +1,118 @@
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.btnWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pauseBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: #67e997;
+  border: none;
+  cursor: pointer;
+  color: #020617;
+
+  &:hover {
+    background: #4ade80;
+  }
+}
+
+.pauseIcon {
+  width: 4px;
+  height: 1rem;
+  background: #020617;
+  border-radius: 2px;
+}
+
+.deleteBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: #ef4444;
+  border: none;
+  cursor: pointer;
+  color: white;
+
+  &:hover {
+    background: #dc2626;
+  }
+}
+
+.tooltip {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-top: 0.25rem;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: #1e293b;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  max-width: 24rem;
+
+  h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.125rem;
+  }
+
+  p {
+    margin: 0 0 1rem;
+    color: #94a3b8;
+    font-size: 0.9rem;
+  }
+}
+
+.modalActions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+.cancelBtn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(71, 85, 105, 0.5);
+  background: transparent;
+  color: #f1f5f9;
+  cursor: pointer;
+}
+
+.confirmBtn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  border: none;
+  background: #ef4444;
+  color: white;
+  cursor: pointer;
+
+  &:hover {
+    background: #dc2626;
+  }
+}

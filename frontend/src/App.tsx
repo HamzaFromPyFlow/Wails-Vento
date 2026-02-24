@@ -80,7 +80,7 @@ function App() {
           <Route path="/recordings" element={<RequireAuth><RecordingsPage /></RequireAuth>} />
           <Route path="/recordings/folder/:folderId" element={<RequireAuth><FolderPage /></RequireAuth>} />
           <Route path="/view/:id" element={<RequireAuth><ViewRecording /></RequireAuth>} />
-          <Route path="/record/new" element={<RequireAuth><RecordNew /></RequireAuth>} />
+          <Route path="/record/new" element={<RecordNew />} />
           <Route path="/profile" element={<RequireAuth><Profile /></RequireAuth>} />
           <Route path="/pricing" element={<Navigate to="/" replace />} />
           <Route path="*" element={<Navigate to="/" replace />} />

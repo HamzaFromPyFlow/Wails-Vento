@@ -1,0 +1,51 @@
+.wrapper {
+  margin-top: 2rem;
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
+}
+
+.title {
+  margin-bottom: 0.75rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+
+.videoWrap {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: #000;
+}
+
+.video {
+  width: 100%;
+  display: block;
+}
+
+.actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+.primaryBtn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background: #67e997;
+  color: #020617;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.secondaryBtn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(71, 85, 105, 0.5);
+  background: transparent;
+  color: #f1f5f9;
+  cursor: pointer;
+}

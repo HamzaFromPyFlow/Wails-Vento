@@ -30,7 +30,7 @@ export default function Header({
   const redirectUrl = useRedirectAuthUrl();
   const signUpRedirectUrl = useSignUpRedirectAuthUrl();
   const homeUrl = ventoUser ? '/recordings' : '/';
-  const canRecord = !isBrowser() || isSupportedBrowser();
+  const canRecord = isSupportedBrowser();
   const pathname = location.pathname;
   const [isModalOpen, setIsModalOpen] = useState(false);
 

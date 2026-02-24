@@ -1,0 +1,83 @@
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.statusText {
+  display: flex;
+  flex-direction: column;
+  min-width: 12rem;
+
+  .status {
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
+    font-weight: 500;
+
+    > svg {
+      width: 1.125rem;
+      height: 1.125rem;
+      margin-right: 0.25rem;
+      fill: #f87171;
+    }
+
+    &.statusPaused > svg {
+      fill: #fb923c;
+    }
+
+    .timer {
+      margin-left: 0.5rem;
+    }
+  }
+
+  .tip {
+    margin: 0.25rem 0 0 0;
+    font-size: 0.85rem;
+    color: #94a3b8;
+
+    strong {
+      color: #67e997;
+    }
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 1rem;
+  min-width: 16rem;
+  border-radius: 10px;
+  background: rgba(30, 41, 59, 0.8);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+
+  > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: none;
+    background: rgba(51, 65, 85, 0.8);
+    color: #f1f5f9;
+    cursor: pointer;
+    font-size: 0.9rem;
+
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    &:hover {
+      background: rgba(71, 85, 105, 0.9);
+    }
+
+    &.pause {
+      background: #67e997;
+      color: #020617;
+    }
+  }
+}
