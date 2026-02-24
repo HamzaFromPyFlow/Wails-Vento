@@ -1,0 +1,408 @@
+/**
+ * Auth pages - dark theme consistent with Landing
+ */
+
+$primary: #818cf8; // indigo-400 to match Landing
+$primary-hover: #6366f1; // indigo-500
+
+.main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #020617; // slate-950
+  color: #f1f5f9; // slate-100
+  position: relative;
+}
+
+.main::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(to bottom right, #020617, #0f172a 50%, rgba(49, 46, 129, 0.3));
+  pointer-events: none;
+  z-index: -1;
+}
+
+.main::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at top, rgba(99, 102, 241, 0.1), transparent);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 557px;
+  max-width: 557px;
+  margin: auto;
+  border: 1px solid rgba(51, 65, 85, 0.5); // slate-700
+  border-radius: 20px;
+  padding: 0 3rem 4.5rem 3rem;
+  background: rgba(15, 23, 42, 0.5); // slate-900
+  backdrop-filter: blur(8px);
+}
+
+.title {
+  font-size: 2rem;
+  line-height: 4rem;
+  text-align: center;
+  margin: 0;
+  font-weight: bold;
+  color: #f1f5f9;
+}
+
+.titleSaveVideo {
+  font-size: 1rem;
+  line-height: 4rem;
+  text-align: center;
+  margin: 0;
+  color: #f1f5f9;
+}
+
+.teamContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  justify-content: center;
+}
+
+.teamTitle {
+  font-size: 1rem;
+  text-align: center;
+  margin: 0;
+  color: #94a3b8;
+}
+
+.teamImg {
+  border-radius: 50%;
+  width: 2.5rem;
+}
+
+.sub {
+  color: #94a3b8;
+  text-align: center;
+  line-height: 0;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.sub span {
+  cursor: pointer;
+  color: $primary;
+}
+
+.sub span:hover {
+  color: $primary-hover;
+}
+
+.btnContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 311px;
+  width: 311px;
+  margin: auto;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.signInBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  width: 100%;
+  font-size: 21px;
+  color: #f1f5f9;
+  border-radius: 20px;
+  background: rgba(51, 65, 85, 0.5);
+  border: 1px solid rgba(71, 85, 105, 0.6);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.signInBtn:hover {
+  background: rgba(71, 85, 105, 0.6);
+  border-color: rgba(99, 102, 241, 0.5);
+}
+
+.signInBtn > img {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-left: 0.5rem;
+}
+
+.separator {
+  text-align: center;
+  margin: 1rem 0 2rem 0;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.separator h2 {
+  position: relative;
+  background: rgba(15, 23, 42, 0.9);
+  display: inline-block;
+  font-size: 1.25rem;
+  padding: 0 0.9rem;
+  margin: 0;
+  margin-top: -4px;
+  z-index: 1;
+  color: #94a3b8;
+  font-weight: bold;
+}
+
+.line {
+  height: 1px;
+  background: rgba(71, 85, 105, 0.6);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.contentWrapper form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.contentWrapper form :global(.mantine-TextInput-root),
+.contentWrapper form :global(.mantine-PasswordInput-root) {
+  width: 100% !important;
+  margin-bottom: 0;
+}
+
+.contentWrapper form :global(.mantine-Popover-dropdown),
+.contentWrapper form :global(.mantine-Popover-target) {
+  width: 100% !important;
+}
+
+$inputBg: rgba(30, 41, 59, 0.8);
+$inputBorder: 1px solid rgba(71, 85, 105, 0.8);
+$inputRadius: 12px;
+$inputPadding: 1rem 1.25rem;
+$inputHeight: 52px;
+
+.contentWrapper form :global(.mantine-TextInput-input),
+.contentWrapper form :global(.mantine-PasswordInput-input) {
+  width: 100% !important;
+  background: $inputBg !important;
+  border: $inputBorder !important;
+  border-radius: $inputRadius !important;
+  color: #f1f5f9 !important;
+  height: $inputHeight !important;
+  min-height: $inputHeight !important;
+  padding: $inputPadding !important;
+  font-size: 1rem !important;
+  transition: border-color 0.2s, box-shadow 0.2s !important;
+  box-sizing: border-box !important;
+}
+
+.contentWrapper form :global(.mantine-TextInput-input:hover),
+.contentWrapper form :global(.mantine-PasswordInput-input:hover) {
+  border-color: rgba(99, 102, 241, 0.4) !important;
+}
+
+.contentWrapper form :global(.mantine-TextInput-input:focus-within),
+.contentWrapper form :global(.mantine-PasswordInput-input:focus-within) {
+  border-color: $primary !important;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.25) !important;
+  outline: none !important;
+}
+
+.contentWrapper form :global(.mantine-TextInput-input input),
+.contentWrapper form :global(.mantine-PasswordInput-input input) {
+  background: transparent !important;
+  color: #f1f5f9 !important;
+  padding: 0 !important;
+  font-size: 1rem !important;
+}
+
+.contentWrapper form :global(.mantine-TextInput-input::placeholder),
+.contentWrapper form :global(.mantine-PasswordInput-input::placeholder),
+.contentWrapper form :global(.mantine-TextInput-input input::placeholder),
+.contentWrapper form :global(.mantine-PasswordInput-input input::placeholder) {
+  color: #64748b !important;
+}
+
+.contentWrapper form :global(.mantine-TextInput-input:focus-within input),
+.contentWrapper form :global(.mantine-PasswordInput-input:focus-within input) {
+  background: transparent !important;
+  outline: none !important;
+}
+
+.contentWrapper form :global(input) {
+  caret-color: #f1f5f9;
+}
+
+.contentWrapper form :global(input:focus),
+.contentWrapper form :global(input:focus-visible) {
+  outline: none !important;
+}
+
+.contentWrapper form :global(.mantine-PasswordInput-innerInput) {
+  background: transparent !important;
+}
+
+.contentWrapper form :global(.mantine-PasswordInput-visibilityToggle) {
+  color: #94a3b8 !important;
+}
+
+.contentWrapper form :global(.mantine-PasswordInput-visibilityToggle:hover) {
+  color: #f1f5f9 !important;
+}
+
+.contentWrapper form :global(.mantine-TextInput-label),
+.contentWrapper form :global(.mantine-PasswordInput-label) {
+  color: #94a3b8 !important;
+}
+
+.contentWrapper form :global(.mantine-Input-error) {
+  color: #f87171 !important;
+}
+
+.submitButton {
+  margin: 1rem 0;
+  background: $primary;
+  height: 57px;
+  width: 100%;
+  text-align: center;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.submitButton:hover {
+  background: $primary-hover;
+}
+
+.submitButton:disabled,
+.submitButton[disabled] {
+  border: 1px solid #475569;
+  background: #334155;
+  color: #64748b;
+  cursor: not-allowed;
+}
+
+.contentWrapper form .sub a {
+  color: $primary;
+  text-decoration: none;
+}
+
+.contentWrapper form .sub a:hover {
+  text-decoration: underline;
+  color: $primary-hover;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.image {
+  width: 147px;
+  height: auto;
+}
+
+.recordNow,
+.LoginBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: $primary;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  text-decoration: none;
+  text-align: center;
+  margin-top: 2rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.recordNow:hover,
+.LoginBtn:hover {
+  background: $primary-hover;
+}
+
+.accounts {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.gmail,
+.outlook {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid rgba(71, 85, 105, 0.6);
+  border-radius: 8px;
+  cursor: pointer;
+  background: rgba(30, 41, 59, 0.4);
+  color: #f1f5f9;
+  transition: all 0.2s;
+}
+
+.gmail:hover,
+.outlook:hover {
+  border-color: $primary;
+  background: rgba(99, 102, 241, 0.15);
+}
+
+.gmail img,
+.outlook img {
+  width: 24px;
+  height: 24px;
+}
+
+.tip {
+  font-size: 14px;
+  color: #94a3b8;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.tip a {
+  color: $primary;
+  text-decoration: none;
+}
+
+.tip a:hover {
+  color: $primary-hover;
+  text-decoration: underline;
+}
+
+.contentWrapper p a {
+  color: $primary;
+  text-decoration: none;
+}
+
+.contentWrapper p a:hover {
+  color: $primary-hover;
+  text-decoration: underline;
+}
