@@ -1,1 +1,7 @@
 /* App-level overrides - Landing uses Tailwind */
+
+/* Remove any white border/line below header */
+nav[class*="header"] {
+  border-bottom: none !important;
+  box-shadow: none !important;
+}

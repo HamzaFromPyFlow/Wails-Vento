@@ -2,6 +2,16 @@
  * Stub - copy from VentoDesktop/renderer/lib/helper-pure.ts for full implementation
  */
 
+export function isBrowser() {
+  return typeof window !== 'undefined';
+}
+
+export function isSupportedBrowser() {
+  if (!isBrowser()) return false;
+  const ua = navigator.userAgent;
+  return ua.includes('Edg') || ua.includes('Chrome') || ua.includes('Brave');
+}
+
 export function obscureFormatEmail(email) {
   if (!email) return '';
   return email.replace(/^(.)(.*?)(@.)(.*?)(\..+)$/, (match, first, beforeAt, atAndAfter, afterAt, domain) =>
@@ -9,7 +19,8 @@ export function obscureFormatEmail(email) {
   );
 }
 
-export function generateUrl(href, searchParams) {
+export function generateUrl(href, searchParams, addHash = false) {
+  if (href.startsWith('http://') || href.startsWith('https://')) return href;
   const filteredParams = new URLSearchParams();
   const flaggedKeys = ['utm_', 'referrer', 'source'];
   if (searchParams && typeof searchParams.forEach === 'function') {
@@ -30,7 +41,8 @@ export function generateUrl(href, searchParams) {
       }
     });
   }
-  return href + (Array.from(filteredParams).length > 0 ? `?${decodeURIComponent(filteredParams.toString())}` : '');
+  const finalHref = addHash ? (href.startsWith('#') ? href : `#${href}`) : href;
+  return finalHref + (Array.from(filteredParams).length > 0 ? `?${decodeURIComponent(filteredParams.toString())}` : '');
 }
 
 export function getStrength(password) {
@@ -45,3 +57,10 @@ export function getStrength(password) {
 }
 
 export const validate = {};
+
+/** Format video duration from seconds to MM:SS */
+export function formatVideoDurationMinutes(seconds) {
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins}:${secs.toString().padStart(2, '0')}`;
+}

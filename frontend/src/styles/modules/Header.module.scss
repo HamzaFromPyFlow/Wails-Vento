@@ -1,0 +1,137 @@
+$max-width: 92rem;
+$primary: #67e997;
+$primary-200: #4ade80;
+$md: 768px;
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+  padding: 0.5rem 50px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: $max-width;
+  background: rgba(2, 6, 23, 0.95);
+  backdrop-filter: blur(8px);
+  border: none;
+  border-bottom: none;
+  box-shadow: none;
+
+  @media screen and (max-width: $md) {
+    padding: 0.5rem 10px;
+  }
+
+  .leftContainer,
+  .rightContainer,
+  .midContainer {
+    display: flex;
+    align-items: center;
+    height: 50px;
+  }
+
+  .rightContainer {
+    gap: 0.75rem;
+
+    .newRecording {
+      padding: 0.5rem 1rem;
+      border-radius: 7.5px;
+      background-color: $primary;
+      color: #020617;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      min-width: 130px;
+      text-align: center;
+    }
+
+    .newRecording:hover {
+      background-color: $primary-200;
+    }
+
+    .hamburgerBtn {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      border: 1px solid rgba(51, 65, 85, 0.5);
+      background: rgba(30, 41, 59, 0.5);
+      color: #f1f5f9;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .hamburgerBtn:hover {
+      background: rgba(51, 65, 85, 0.5);
+    }
+
+    .authBtn {
+      display: inline-flex;
+      align-items: center;
+      gap: 1.6rem;
+    }
+
+    .authBtn .logIn {
+      color: $primary;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .authBtn .signUp {
+      padding: 0.5rem 1rem;
+      border-radius: 7.5px;
+      background-color: rgba(99, 102, 241, 0.9);
+      color: white;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+  }
+
+  .midContainer {
+    width: 60vw;
+    max-width: 400px;
+  }
+
+  .pricing {
+    margin-left: 1.5rem;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+
+  .logo {
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: #f1f5f9;
+    text-decoration: none;
+    margin-left: 0.5rem;
+  }
+
+  .logo:hover {
+    color: white;
+  }
+
+  .image {
+    width: 32px;
+    height: 32px;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+  }
+
+  .searchContainer :global(.mantine-TextInput-input) {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(51, 65, 85, 0.5);
+    color: #f1f5f9;
+  }
+}

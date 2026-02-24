@@ -109,6 +109,11 @@ export default function AuthPage({ login = false }) {
               setIsSubmitting(false);
               return;
             }
+            let redirectTo = searchParams.get('redirect_to') || '/recordings';
+            if (!redirectTo || redirectTo === '/' || redirectTo.startsWith('/auth')) {
+              redirectTo = '/recordings';
+            }
+            navigate(redirectTo);
             setIsSubmitting(false);
           })
           .catch(() => {

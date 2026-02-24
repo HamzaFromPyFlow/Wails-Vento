@@ -1,0 +1,280 @@
+/**
+ * Recordings page - dark theme (slate-950, indigo accents)
+ */
+
+$max-width: 92rem;
+$primary: #818cf8;
+$neutral-600: #475569;
+$neutral-700: #334155;
+$neutral-800: #1e293b;
+
+.headerWrapper {
+  max-width: $max-width;
+  margin: 0 auto;
+  border: none;
+  border-bottom: none;
+}
+
+.main {
+  max-width: $max-width;
+  padding: 0 50px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: #020617;
+  color: #f1f5f9;
+
+  @media screen and (max-width: 768px) {
+    padding: 0 10px;
+  }
+
+  .heading {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem 1.5rem;
+    margin: 0.5rem 0 1.5rem;
+    padding: 1rem 0;
+    flex-wrap: wrap;
+
+    button {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 0.25rem 0;
+
+      &:hover {
+        color: #f1f5f9;
+      }
+    }
+
+    .activeBtn {
+      text-decoration: underline;
+      text-decoration-color: $primary;
+      text-decoration-thickness: 4px;
+      text-underline-offset: 5px;
+      color: #f1f5f9;
+    }
+
+    .limitContainer {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+    }
+
+    .recordingPageBtnsContainer {
+      display: flex;
+      flex-direction: row;
+      margin-left: auto;
+      gap: 1rem;
+    }
+
+    .newFolderBtn,
+    .uploadVideoBtn,
+    .inviteBtn {
+      padding: 0.5rem 1rem;
+      border-radius: 7.5px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .newFolderBtn {
+      background-color: $neutral-700;
+      color: #f1f5f9;
+
+      &:hover {
+        background-color: $neutral-600;
+      }
+    }
+
+    .uploadVideoBtn {
+      background-color: #67e997;
+      color: #020617;
+
+      &:hover {
+        background-color: #4ade80;
+      }
+    }
+
+    .inviteBtn {
+      background-color: $primary;
+      color: white;
+
+      &:hover {
+        background-color: #6366f1;
+      }
+    }
+
+    .headingLink {
+      color: $primary;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .subHeading {
+    font-weight: 500;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .recordingsContainer,
+  .foldersContainer {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+
+    .recordingItem,
+    .folderItem {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid rgba(51, 65, 85, 0.5);
+    }
+
+    .title {
+      font-weight: 500;
+    }
+
+    .recordingItem {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+
+      &:hover {
+        outline: 2px solid $primary;
+      }
+
+      .picture {
+        position: relative;
+        display: inline-block;
+        min-height: 160px;
+      }
+
+      .thumbnail {
+        width: 100%;
+        height: 10rem;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+      }
+
+      .timestamp {
+        position: absolute;
+        bottom: 10px;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 10px;
+        font-size: 12px;
+        z-index: 1;
+      }
+
+      .data {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.7rem 1rem 1rem;
+
+        > div {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .title {
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          font-size: 0.95rem;
+          color: #f1f5f9;
+          flex: 1;
+        }
+
+        .timeStr {
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          flex: 1;
+          font-size: 0.8rem;
+          color: #94a3b8;
+        }
+
+        .viewCount {
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
+          color: #94a3b8;
+        }
+      }
+    }
+
+    .folderItem {
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: inherit;
+
+      &:hover {
+        background: rgba(51, 65, 85, 0.5);
+      }
+
+      .data {
+        min-width: 0;
+
+        p {
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          margin: 0;
+          font-size: 0.9rem;
+        }
+
+        .title {
+          font-weight: 500;
+          color: #f1f5f9;
+        }
+      }
+
+      .folderIcon {
+        color: #f4a261;
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  .foldersContainer {
+    margin-bottom: 2rem;
+  }
+
+  .loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 0;
+  }
+
+  .noRecordingsWatermark {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 0;
+    color: #64748b;
+    font-size: 1.25rem;
+  }
+}
