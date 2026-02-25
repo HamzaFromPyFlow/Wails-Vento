@@ -1,0 +1,59 @@
+@use "../_mixins" as *;
+@use "../_variables" as *;
+
+.main {
+  @include flex(column);
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.summaryHeader {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 0.75rem;
+  border: 1px solid $neutral-300;
+  border-radius: 8px;
+  font-family: var(--font-base);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  resize: vertical;
+  outline: none;
+
+  &:focus {
+    border-color: $primary-400;
+    box-shadow: 0 0 0 3px rgba($primary-400, 0.1);
+  }
+
+  &::placeholder {
+    color: $neutral-400;
+  }
+}
+
+.summaryText {
+  padding: 0.75rem;
+  min-height: 120px;
+  font-family: var(--font-base);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: $neutral-700;
+
+  .placeholder {
+    color: $neutral-400;
+    font-style: italic;
+  }
+}
+
+.summaryLength {
+  font-size: 0.75rem;
+  color: $neutral-400;
+  text-align: right;
+  margin-top: 0.25rem;
+}

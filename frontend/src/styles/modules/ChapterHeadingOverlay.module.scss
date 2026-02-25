@@ -1,0 +1,67 @@
+@use "../_mixins" as *;
+@use "../_variables" as *;
+
+.headingModal {
+  @include flex(column);
+  gap: 0.5rem;
+
+  background-color: white;
+  border-radius: 10px;
+
+  width: 30rem;
+
+  position: relative;
+  box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.05);
+
+  max-width: 100%;
+  padding: 2rem;
+
+  @include sm {
+    max-width: $max-width;
+  }
+
+  h3 {
+    font-family: var(--font-base);
+    font-weight: 500;
+    font-size: 1.5rem;
+  }
+
+  .row {
+    @include flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+
+    > * {
+      font-size: 0.8rem;
+    }
+  }
+
+  .ctaContainer {
+    @include flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 0.75rem;
+
+    button {
+      font-size: 0.85rem;
+    }
+
+    .deleteCta {
+      color: $red-400;
+    }
+
+    .insertCta {
+      @include btn-base("small");
+      border-radius: 5px;
+      padding: 0.45rem 0.75rem;
+      background-color: $primary-400;
+    }
+  }
+
+  .closeBtn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+}

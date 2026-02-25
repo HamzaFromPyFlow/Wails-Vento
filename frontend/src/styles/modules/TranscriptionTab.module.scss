@@ -1,0 +1,91 @@
+@use "../_mixins" as *;
+@use "../_variables" as *;
+
+.transcriptionPanel {
+  .editBtn {
+    @include flex-center;
+    gap: 0.35rem;
+    line-height: 1;
+
+    background-color: $neutral-800;
+    border-radius: 999px;
+    padding: 0.5rem 1rem;
+  }
+
+  .toolbar {
+    @include flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .cancelBtn,
+    .saveBtn {
+      @include btn-base();
+      padding: 0.5rem 1rem;
+    }
+
+    .saveBtn {
+      background-color: $neutral-800;
+      border-radius: 999px;
+    }
+  }
+}
+
+.transcriptionList {
+  overflow: auto;
+  max-height: 80vh;
+  max-width: 100%;
+  list-style: none;
+  margin-top: 0.75rem;
+
+  > li {
+    margin: 0.25rem 0rem;
+    padding: 0.35rem 0.5rem;
+    border-radius: 7.5px;
+
+    span {
+      line-height: 1.4;
+    }
+
+    button {
+      width: 100%;
+      @include flex;
+      text-align: start;
+    }
+
+    .timestamp {
+      color: $blue-400;
+      margin-right: 0.5rem;
+    }
+
+    &:hover {
+      background-color: $neutral-800;
+      transition: all;
+    }
+
+    &.inactive {
+      span.content {
+        color: gray;
+      }
+    }
+  }
+}
+
+.generateTranscriptionBtn {
+  @include btn-base();
+  background-color: $primary-400;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.deleteTranscriptionBtn {
+  @include btn-base();
+  background-color: $red-300;
+  margin-top: 1rem;
+}
+
+.generateTranscriptionBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

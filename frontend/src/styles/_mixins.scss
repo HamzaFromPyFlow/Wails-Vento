@@ -1,0 +1,71 @@
+@use "variables" as *;
+
+@mixin flex-center($direction: row, $justify: center, $items: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $items;
+}
+
+@mixin flex($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+}
+
+@mixin gap-x($amount: 0.5rem) {
+  > * + * {
+    margin-left: $amount;
+  }
+}
+
+@mixin gap-y($amount: 0.5rem) {
+  > * + * {
+    margin-top: $amount;
+  }
+}
+
+// Small devices
+@mixin sm {
+  @media screen and (min-width: $sm) {
+    @content;
+  }
+}
+
+// Medium devices
+@mixin md {
+  @media screen and (min-width: $md) {
+    @content;
+  }
+}
+
+// Large devices
+@mixin lg {
+  @media screen and (min-width: $lg) {
+    @content;
+  }
+}
+
+@mixin hideInMobile($display: block) {
+  display: none;
+  @include sm {
+    display: $display;
+  }
+}
+
+@mixin btn-base($size: "base") {
+  @include flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  @if $size == "base" {
+    padding: 0.75rem 1rem;
+    border-radius: 7.5px;
+  } @else if $size == "small" {
+    padding: 0.25rem 0.75rem;
+    border-radius: 7.5px;
+  } @else {
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+  }
+}

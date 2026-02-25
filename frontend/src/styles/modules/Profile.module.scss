@@ -1,0 +1,529 @@
+@use "sass:color";
+@use "../_mixins" as *;
+@use "../_variables" as *;
+
+.main {
+  max-width: $max-width;
+  padding: 40px $padding-x;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 21px;
+  font-weight: 500;
+  padding: 0px 10px;
+  button {
+    font-weight: 500;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: inherit;
+    padding: 0;
+  }
+}
+
+.headerTitle {
+  display: flex;
+  flex-direction: row;
+}
+
+.activeBtn {
+  border-bottom: 6px solid #67e997;
+  width: fit-content;
+}
+
+.images {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.titleNoBorder {
+  width: fit-content;
+  font-size: 21px;
+  font-weight: 500;
+}
+
+.mb1 {
+  margin-bottom: 1rem;
+}
+
+.titleNoBorderSmall {
+  font-size: 16px;
+}
+
+.subtitle {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.subtitle3 {
+  font-size: 12px;
+  font-weight: 400;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.flexBox {
+  display: flex;
+
+  @media screen and (max-width: $md) {
+    flex-direction: column;
+  }
+}
+
+.subtitle2 {
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 40px;
+}
+
+.line {
+  height: 100%;
+  border: 4px #f3f3f3 solid;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.pwdSectionDesc {
+  margin-top: 10px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.newPasswordContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.profileImage {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+
+  &:hover {
+    background-color: $neutral-800;
+  }
+}
+
+.cameraImage {
+  border-radius: 100%;
+  padding: 30px;
+  border: 1px solid #9a989c;
+  cursor: pointer;
+}
+
+.input {
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border: 2px solid #555555;
+  width: 360px;
+  @media screen and (max-width: $sm) {
+    width: 100%;
+  }
+  font-size: 21px;
+  font-weight: 500;
+  padding: 0.5rem;
+
+  &:focus-visible {
+    outline: 0 !important;
+  }
+}
+
+.inputEmail {
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  margin-top: 10px !important;
+  border: 2px solid #555555;
+  width: 360px;
+  @media screen and (max-width: $sm) {
+    width: 100%;
+  }
+  &:focus-visible {
+    outline: 0 !important;
+  }
+  font-size: 21px;
+  font-weight: 500;
+  padding: 0.5rem;
+
+  &:read-only {
+    color: #bcbab8;
+  }
+}
+
+.notificationInputEmail {
+  margin-top: 30px !important;
+}
+
+.titleNoWeight {
+  font-size: 21px;
+}
+
+.changeTeamNameBtn {
+  @include btn-base();
+  background-color: $primary-400;
+  margin-top: 1.5rem;
+  padding: 1rem 2rem;
+  width: 200px;
+  height: 48px;
+  font-size: 14px;
+
+  &:hover {
+    filter: brightness(0.95);
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  align-items: center;
+  transition-duration: 200ms;
+}
+
+.changeEmailBtn {
+  @include btn-base();
+  background-color: $primary-400;
+  margin-top: 1.5rem;
+  padding: 1rem 2rem;
+  width: 177px;
+  height: 48px;
+  font-size: 14px;
+
+  &:hover {
+    filter: brightness(0.95);
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  align-items: center;
+  transition-duration: 200ms;
+
+  &--remove {
+    background-color: #f04438;
+    color: #fff;
+
+    &:hover:not(:disabled) {
+      background-color: color.adjust(#f04438, $lightness: -5%);
+    }
+  }
+}
+
+.changeNotificationEmailBtn {
+  margin-top: 2.5rem !important;
+
+  @media (max-width: 768px) {
+    margin: 1rem auto !important;
+  }
+}
+
+.error {
+  color: #ff0000;
+  font-size: 12px;
+  font-weight: 400;
+  width: 360px;
+  margin-top: 5px;
+  @media screen and (max-width: $sm) {
+    width: 100%;
+  }
+}
+
+.chipProvider {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 20px;
+  box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.07);
+  border-radius: 20px;
+  text-align: center;
+  font-size: 21px;
+  font-weight: 400px;
+  max-width: 400px;
+  cursor: pointer;
+}
+
+.chipProvider.disabled {
+  cursor: not-allowed;
+}
+
+.chipProvider:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.02);
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.09);
+}
+
+.chipProvider.disabled:hover .tooltipText {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltipText {
+  visibility: hidden;
+  width: 270px;
+  background-color: #d9d9d9;
+  color: black;
+  text-align: left;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 10px 20px;
+  position: absolute;
+  top: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 1;
+}
+
+.setPassword {
+  margin-top: 10px;
+}
+
+.chips {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.chipSection {
+  margin-left: 140px;
+  @media screen and (max-width: 1000px) {
+    margin-left: 40px;
+  }
+  @media screen and (max-width: 768px) {
+    margin-left: 0px;
+  }
+}
+
+.modalHeading {
+  font-weight: 500;
+  font-size: 21px;
+}
+
+.teamTableContainer {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.teamTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.teamTableHead {
+  background-color: #f3f3f3;
+}
+
+.teamTableHead th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.userCol {
+  width: 40%;
+}
+
+.smallCol {
+  width: 15%;
+}
+
+.largeCol {
+  width: 20%;
+}
+
+.rowWrapper {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.darkBg {
+  background-color: #fafafa;
+}
+
+.lightBg {
+  background-color: #ffffff;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.userName {
+  font-weight: 500;
+}
+
+.standardWeight {
+  font-weight: 400;
+}
+
+.reSendUserBtnOutline,
+.cancelInviteBtnOutline,
+.removeUserBtnOutline,
+.deleteUserBtnOutline {
+  @include btn-base(small);
+  border: 1px solid $primary-400;
+  background-color: transparent;
+  color: $primary-400;
+  padding: 0.5rem 1rem;
+  font-size: 12px;
+
+  &:hover {
+    background-color: $primary-400;
+    color: white;
+  }
+}
+
+.notificationEmailinputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.notificationEmailInfo {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.notificationSettingsContainer {
+  margin-top: 2rem;
+}
+
+.notificationSetting {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #e0e0e0;
+  align-items: center;
+}
+
+.event {
+  font-weight: 500;
+}
+
+.notificationAction {
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+}
+
+.notificationActionToggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: $primary-400;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px $primary-400;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.bouncingLoader {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: $primary-400;
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.dot:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.dot:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+.displayNameInfo {
+  cursor: help;
+  color: #666;
+  font-size: 16px;
+}

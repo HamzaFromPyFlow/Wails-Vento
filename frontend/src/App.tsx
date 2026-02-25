@@ -11,7 +11,7 @@ import Landing from "./pages/Landing";
 import RecordingsPage from "./pages/recordings/Recordings.jsx";
 import FolderPage from "./pages/recordings/FolderPage.jsx";
 import ViewRecording from "./pages/view/ViewRecording.jsx";
-import RecordNew from "./pages/record/RecordNew.jsx";
+import RecordNew from "./pages/record/Record.jsx";
 import Profile from "./pages/profile/Profile.jsx";
 import AuthPage from "./pages/auth/Auth.jsx";
 import ResetPasswordPage from "./pages/auth/ResetPassword.jsx";

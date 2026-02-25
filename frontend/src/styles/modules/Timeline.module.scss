@@ -1,0 +1,210 @@
+@use "../_mixins" as *;
+@use "../_variables" as *;
+
+.timelineContainer {
+  position: relative;
+  margin-top: 1.5rem;
+}
+
+.timeline {
+  z-index: 99999999;
+  @include flex;
+  position: relative;
+
+  height: 2rem;
+
+  border-radius: 5px;
+  border: 1px solid white;
+
+  @media (min-width: $sm) {
+    height: 4rem;
+  }
+
+  :global(#waveform) {
+    margin: auto 0rem;
+    height: 90%;
+    width: 100%;
+  }
+
+  .loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .cursor {
+    position: absolute;
+    left: 0;
+    top: -5px;
+    bottom: -5px;
+
+    @include flex;
+    justify-content: center;
+
+    background-color: red;
+    cursor: ew-resize;
+
+    width: 2px;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      width: 0.4rem;
+      height: 0.4rem;
+      border-radius: 999px;
+
+      background-color: red;
+    }
+
+    &::before {
+      top: 0;
+    }
+
+    &::after {
+      bottom: 0;
+    }
+
+    &.trimMode {
+      cursor: auto;
+      pointer-events: none;
+
+      &::before {
+        width: 0.85rem;
+        height: 0.85rem;
+        top: -0.65rem;
+
+        border-radius: 999px;
+        pointer-events: auto;
+        cursor: ew-resize;
+      }
+    }
+  }
+
+  .rewindOverlay {
+    position: absolute;
+    top: -1px;
+    bottom: -1px;
+    left: -1px;
+    right: -1px;
+
+    user-select: none;
+
+    background-color: rgba($primary-400, 0.2);
+    border: 1px solid rgba($primary-400, 0.5);
+    border-radius: 0px 5px 5px 0px;
+  }
+
+  .trimOverlay {
+    position: absolute;
+    top: -1px;
+    bottom: -1px;
+
+    user-select: none;
+
+    background-color: rgba($primary-400, 0.3);
+    border: 1px solid rgba($primary-200, 0.5);
+
+    &.blurOverlay {
+      background-color: rgba(#4987EC, 0.3);
+      border: 1px solid rgba(#4285F4, 0.5);
+    }
+
+    .leftGrabBar,
+    .rightGrabBar {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0.4rem;
+      height: 70%;
+      border-radius: 15px;
+      background-color: $primary-200;
+      cursor: grab;
+    }
+
+    .blurLeftGrabBar,
+    .blurRightGrabBar {
+      background-color: #4285F4;
+    }
+
+    .leftGrabBar {
+      left: 0%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+
+    .rightGrabBar {
+      right: 0px;
+      transform: translateX(50%) translateY(-50%);
+    }
+
+    .trimStartText {
+      position: absolute;
+      top: -2.3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      background-color: $primary-200;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      color: white;
+    }
+
+    .blurStartText {
+      background-color: #4285F4;
+    }
+
+    .trimEndText {
+      position: absolute;
+      bottom: -2.3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      background-color: $primary-200;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      color: white;
+    }
+
+    .blurEndText {
+      background-color: #4285F4;
+    }
+  }
+
+  .ctaLinkContainer {
+    position: absolute;
+    top: -30px;
+    background-color: white;
+    border-radius: 10px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 5px;
+      border-style: solid;
+      border-color: white transparent transparent transparent;
+    }
+
+    .ctaLinkIcon {
+      display: flex;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ctaLinkIcon img {
+      height: 25px;
+      width: 25px;
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@mantine/notifications": "^8.3.15",
+    "crypto-js": "^4.2.0"
+  }
+}

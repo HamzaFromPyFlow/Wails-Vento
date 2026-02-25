@@ -1,0 +1,72 @@
+@use "../_mixins" as *;
+@use "../_variables" as *;
+
+.annotationModal {
+  @include flex(column);
+  gap: 0.5rem;
+
+  background-color: white;
+  border-radius: 10px;
+
+  width: 35rem;
+
+  position: relative;
+  box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.05);
+
+  max-width: 100%;
+  padding: 2rem;
+
+  @include sm {
+    max-width: $max-width;
+  }
+
+  h3 {
+    font-family: var(--font-base);
+    font-weight: 500;
+    font-size: 1.5rem;
+  }
+
+  .description {
+    color: $neutral-400;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .ctaContainer {
+    @include flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 0.75rem;
+
+    button {
+      font-size: 0.85rem;
+    }
+
+    .userIcon {
+      border-radius: 999px;
+      width: 5rem;
+      height: 5rem;
+      margin-right: auto;
+    }
+
+    .deleteCta {
+      color: $red-400;
+      align-self: flex-start;
+      padding: 0.45rem 0.75rem;
+    }
+
+    .insertCta {
+      @include btn-base("small");
+      border-radius: 5px;
+      padding: 0.45rem 0.75rem;
+      background-color: $primary-400;
+      align-self: flex-start;
+    }
+  }
+
+  .closeBtn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+}

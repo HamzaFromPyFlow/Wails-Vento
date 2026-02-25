@@ -1,0 +1,355 @@
+@use "../mixins" as *;
+@use "../variables" as *;
+
+.main {
+  @include flex(column);
+  align-items: center;
+  padding: 2rem $padding-x;
+
+  .prompt {
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .recordBtn {
+    padding: 0.75rem 2rem;
+
+    background-color: $primary-400;
+    border-radius: 7.5px;
+
+    @include flex-center;
+    gap: 0.5rem;
+    flex: 1;
+  }
+
+  .toolbarTip {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 1.5rem;
+    margin-left: 1.5rem;
+    width: 280px;
+  }
+
+  .toolbarTipText {
+    font-size: 0.7rem;
+    padding-left: 10px;
+  }
+
+  .getChrome {
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    margin-top: 2rem;
+    background-color: $primary-600;
+
+    > img {
+      width: 1.25rem;
+      margin-left: 0.25rem;
+      object-fit: contain;
+    }
+
+    display: none;
+    @include sm {
+      display: flex;
+    }
+  }
+
+  :global(#webcam) {
+    display: none;
+    border-radius: 999px;
+    width: 100px;
+    height: 100px;
+  }
+
+  :global(#recording) {
+    max-width: 80%;
+    display: none;
+  }
+}
+
+.countdown {
+  @include flex-center(column);
+
+  * {
+    color: white;
+  }
+
+  // Timer
+  h1 {
+    font-size: 6rem;
+    font-family: var(--font-base);
+    font-weight: 400;
+
+    width: 10rem;
+    height: 10rem;
+    line-height: 10rem;
+    text-align: center;
+
+    margin: 0;
+
+    border-radius: 999px;
+    border: 2px solid $neutral-400;
+  }
+
+  p {
+    font-size: 2.25rem;
+    margin: 0;
+    margin-top: 1rem;
+
+    text-align: center;
+  }
+
+  .stopText {
+    font-size: 1.5rem;
+  }
+}
+
+.limitOverlay {
+  max-width: $max-width;
+  padding: $padding-x;
+  @include flex(column);
+  align-items: center;
+
+  .limitTitle {
+    font-family: var(--font-base);
+    color: white;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .limitBtnContainer {
+    @include flex-center;
+
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+
+    > a {
+      @include btn-base;
+    }
+
+    .monthlyCta {
+      background-color: $primary-400;
+
+      > svg {
+        fill: $orange-500;
+      }
+    }
+
+    .yearlyCta {
+      background-color: $orange-400;
+    }
+
+    .deleteCta {
+      background-color: white;
+    }
+  }
+}
+
+.resolutionOverlay {
+  max-width: $max-width;
+  padding: $padding-x;
+  @include flex(column);
+  align-items: center;
+
+  .resolutionTitle {
+    font-family: var(--font-base);
+    color: white;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .resolutionBtnContainer {
+    @include flex-center;
+
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+
+    > * {
+      @include btn-base;
+      height: 3rem;
+    }
+
+    .monthlyCta {
+      background-color: $primary-400;
+
+      > svg {
+        fill: $orange-500;
+      }
+    }
+
+    .yearlyCta {
+      background-color: $orange-400;
+    }
+
+    .ignoreCta {
+      background-color: white;
+    }
+  }
+}
+.upgradeModal {
+  max-width: 100%;
+  width: 50rem;
+  padding:2rem;
+
+  @include flex(column);
+  align-items: center;
+
+  background-color: $orange-800;
+  border-radius: 30px;
+
+  position: relative;
+
+  .logo {
+    position: relative;
+    width: 9rem;
+    height: 9rem;
+
+    margin-bottom: -4.5rem;
+    z-index: 20;
+  }
+
+  .curves {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .content {
+    z-index: 10;
+    width: 95%;
+    @include flex-center(column);
+    gap: 1.2rem;
+    padding: 6rem 2rem 2rem 2rem;
+
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px 5px rgba($color: #000000, $alpha: 0.05);
+    text-align: center;
+
+    .title {
+      font-size: 2.5rem;
+    }
+    .titleLarge {
+      font-size: 3.5rem;
+    }
+
+    .description {
+      font-size: 1.2rem;
+    }
+
+    .featureList {
+      list-style: none;
+
+      > li {
+        gap: 0.5rem;
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.75rem;
+        font-size: 1.1rem;
+      }
+    }
+
+    .ctaBtn {
+      @include btn-base("large");
+      background-color: $orange-500;
+      width: 50%;
+    }
+
+    .ignoreOfferBtn {
+      text-decoration: underline;
+      text-underline-offset: 2.5px;
+    }
+  }
+}
+.upsellModal {
+  max-width: 100%;
+  width: 50rem;
+
+  padding: 4rem;
+
+  @include flex(column);
+  align-items: center;
+
+  background-color: $orange-800;
+  border-radius: 30px;
+
+  position: relative;
+
+  .logo {
+    position: relative;
+    width: 9rem;
+    height: 9rem;
+
+    margin-bottom: -4.5rem;
+    z-index: 20;
+  }
+
+  .curves {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .content {
+    z-index: 10;
+
+    @include flex-center(column);
+    gap: 1.5rem;
+    padding: 6rem 2rem 2rem 2rem;
+
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px 5px rgba($color: #000000, $alpha: 0.05);
+    text-align: center;
+
+    .title {
+      font-size: 3.5rem;
+    }
+
+    .description {
+      font-size: 1rem;
+      color: $neutral-400;
+    }
+
+    .featureList {
+      list-style: none;
+
+      > li {
+        @include flex-center;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+      }
+    }
+
+    .ctaBtn {
+      @include btn-base("large");
+      background-color: $primary-400;
+      width: 50%;
+    }
+
+    .ignoreOfferBtn {
+      text-decoration: underline;
+      text-underline-offset: 2.5px;
+    }
+  }
+}
+.sub {
+  color: $neutral-400;
+  text-align: center;
+  font-size: 15px;
+  line-height: 0;
+  margin-top: 15px;
+  margin-bottom: 1rem;
+
+  span {
+    cursor: pointer;
+    color: $primary-400;
+  }
+}

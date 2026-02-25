@@ -1,0 +1,252 @@
+@use "../_mixins" as *;
+@use "../_variables" as *;
+
+$view-recording-max-width: 76rem;
+
+.main {
+  @include flex(column);
+  gap: 0rem;
+  padding: 1rem $padding-x;
+  margin: 0rem 3rem 3rem 3rem;
+
+  max-width: $view-recording-max-width;
+
+  &.withHeading {
+    max-width: $max-width;
+  }
+
+  @include lg {
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  .leftColumn {
+    @include flex(column);
+    flex: 1;
+
+    .videoHeaderPrompt {
+      @include flex();
+      align-items: center;
+      flex-wrap: wrap;
+
+      margin-bottom: 1.25rem;
+
+      .signInPrompt {
+        @include hideInMobile;
+      }
+
+      .btnContainers {
+        @include flex;
+        margin-left: auto;
+        gap: 0.5rem;
+
+        > button {
+          @include flex();
+          @include btn-base;
+          background-color: $primary-600;
+          padding: 0.5rem 1rem;
+
+          &:hover {
+            filter: brightness(0.95);
+          }
+          align-items: center;
+          transition-duration: 200ms;
+        }
+
+        .copyLinkBtn {
+          svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-left: 0.25rem;
+          }
+        }
+      }
+    }
+
+    .growthHookPrompt {
+      margin: 0 auto;
+      margin-bottom: 1.5rem;
+
+      padding: 0.5rem 1rem;
+
+      border-radius: 7.5px;
+      background-color: $primary-600;
+    }
+
+    .encodingText {
+      @include flex-center(column);
+      width: 100%;
+      height: 25rem;
+
+      background-color: $neutral-800;
+      border-radius: 10px;
+      margin: 0 auto;
+
+      @include gap-y;
+    }
+
+    .metaContainer {
+      @include flex(column);
+      gap: 0.5rem;
+
+      .infoContainer {
+        width: 100%;
+
+        @include flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 1rem 0 0 0;
+
+        .lockBtn {
+          margin-top: 0.25rem;
+        }
+
+        .leftColumn {
+          @include flex(column);
+          gap: 0.25rem;
+
+          .title:not(.disableEdit) {
+            &:hover {
+              color: $primary-200;
+            }
+          }
+
+          .titleInput {
+            font-size: 2rem;
+            font-weight: bold;
+            font-family: var(--font-heading);
+
+            outline: none;
+            border: none;
+
+            width: 100%;
+
+            &::placeholder {
+              color: $neutral-400;
+              font-weight: normal;
+            }
+
+            &:focus {
+              box-shadow: 0px 2px 0px 0px black;
+            }
+          }
+        }
+
+        .viewCount {
+          @include flex;
+          align-items: center;
+          margin-left: auto;
+          gap: 0.25rem;
+        }
+      }
+    }
+  }
+
+  .headingPanel {
+    flex-basis: 25%;
+    margin-top: 1rem;
+
+    @include lg {
+      margin-top: 0;
+    }
+
+    & :global(.mantine-Tabs-tabsList) :global(.mantine-Tabs-tabLabel) {
+      font-size: 1.025rem;
+      font-weight: 500;
+    }
+
+    .headingList {
+      overflow: auto;
+      max-height: 80vh;
+      max-width: 100%;
+      list-style: none;
+      margin-top: 0.75rem;
+
+      > li {
+        margin: 0.25rem 0rem;
+        padding: 0.35rem 0.5rem;
+        border-radius: 7.5px;
+
+        span {
+          line-height: 1.4;
+        }
+
+        button {
+          width: 100%;
+          @include flex;
+          text-align: start;
+        }
+
+        .timestamp {
+          color: $blue-400;
+          margin-right: 0.5rem;
+        }
+
+        &:hover {
+          background-color: $neutral-800;
+          transition: all;
+        }
+      }
+    }
+  }
+}
+
+.recoverBtn {
+  @include btn-base();
+  background-color: $primary-400;
+  margin-top: 1rem;
+}
+
+.greenLink {
+  color: $primary-200;
+  margin-left: 0.5rem;
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+
+    margin-bottom: -0.25rem;
+    fill: $primary-200;
+  }
+}
+
+.videoWrapper {
+  position: relative;
+}
+
+.moreBtn {
+  @include flex();
+  @include btn-base;
+  background-color: $primary-600;
+  padding: 0.5rem 1rem;
+  align-items: center;
+  gap: 0.25rem;
+
+  &:hover {
+    filter: brightness(0.95);
+  }
+}
+
+:global(.vento-player).video {
+  position: relative;
+  border-radius: 0px;
+
+  max-width: none !important;
+  width: calc(100% + $padding-x * 2) !important;
+  margin: 0 calc(-1 * $padding-x) !important;
+
+  @include sm {
+    width: 100% !important;
+    margin: 0 auto !important;
+    border-radius: 10px;
+  }
+
+  &:global(.embed) {
+    border-radius: 0px;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+}
+

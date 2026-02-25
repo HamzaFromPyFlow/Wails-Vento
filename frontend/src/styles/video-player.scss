@@ -1,0 +1,519 @@
+@use "mixins" as *;
+@use "variables" as *;
+
+.video-js.vento-player {
+  position: relative;
+  .embed & {
+    width: 100%;
+    height: 100% !important;
+  }
+
+  overflow: hidden;
+  border-radius: 0px;
+
+  @include sm {
+    border-radius: 10px;
+  }
+
+  * {
+    color: white;
+  }
+
+  .caption-button {
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 60%;
+    opacity: 1;
+    padding: 0.25rem;
+
+    &.vjs-active {
+      background-image: url("/assets/video-js/cc-active.svg");
+    }
+    &.vjs-disabled {
+      background-image: url("/assets/video-js/cc-disable.svg");
+    }
+    &.vjs-hidden {
+      display: none;
+    }
+  }
+
+  .vjs-subs-caps-button {
+    display: none;
+  }
+
+  // - !important required because videojs sets a default style with `style`
+  .vjs-text-track-display {
+    z-index: 20;
+
+    > div > div > div {
+      font-size: 1rem !important;
+      padding: 0.4rem 0.5rem !important;
+      border-radius: 10px;
+      background: rgba($color: #000000, $alpha: 0.5) !important;
+
+      display: inline-block !important;
+
+      @include sm {
+        font-size: 1.25rem !important;
+      }
+    }
+  }
+
+  .vjs-control {
+    .vjs-menu-item.vjs-selected .vjs-menu-item-text {
+      color: black;
+    }
+  }
+
+  & .vjs-progress-control {
+    .vjs-progress-holder {
+      margin: 0;
+    }
+
+    .vjs-play-progress.vjs-slider-bar {
+      border-radius: 20px;
+
+      .vjs-time-tooltip {
+        color: black;
+      }
+    }
+  }
+
+  &.vjs-has-started {
+    .vjs-big-play-button {
+      display: none;
+    }
+  }
+
+  .vjs-big-play-button {
+    border-radius: 999px;
+    border: none;
+    height: 5rem;
+    width: 5rem;
+    transform: translateY(-12.5%);
+    background-color: $primary-200;
+    z-index: 10;
+
+    @include flex-center;
+
+    .vjs-icon-placeholder {
+      @include flex-center;
+      background-image: url("/assets/video-js/play.svg");
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: contain;
+
+      width: 60%;
+      height: 60%;
+      margin-left: 0.5rem;
+
+      &::before {
+        content: "";
+      }
+    }
+  }
+
+  .settings-menu-button {
+    .vjs-icon-placeholder {
+      @include flex-center;
+      background-image: url("/assets/video-js/menu-button.svg");
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: contain;
+      width: 60%;
+      height: 60%;
+
+      margin-left: 5px;
+      padding: 0px;
+    }
+
+    .vjs-menu-button[aria-expanded="true"] + .vjs-menu {
+      display: inline-block;
+    }
+
+    &.vjs-hover .vjs-menu {
+      display: inline-block;
+    }
+
+    .vjs-menu {
+      width: 7.5rem;
+    }
+
+    .vjs-menu-content {
+      right: -0.5rem;
+      transform: translateX(-50%);
+    }
+
+    li.vjs-menu-item {
+      padding: 0.25rem 0.5rem;
+      text-transform: none;
+    }
+  }
+}
+
+// If not nested under vento player, it will be hidden
+.embed-overlay {
+  display: none;
+}
+
+.vento-player {
+  .embed-overlay {
+    position: absolute;
+    padding: 1rem;
+    display: block;
+    pointer-events: none;
+
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba($color: #000000, $alpha: 0.4);
+
+    &.playing {
+      background-color: transparent;
+
+      .header {
+        h1 {
+          display: none;
+        }
+
+        .logo {
+          display: block !important;
+        }
+      }
+    }
+
+    .header {
+      display: flex;
+      align-items: flex-start;
+      pointer-events: auto;
+
+      .title {
+        h1 {
+          font-family: var(--font-base);
+          font-weight: 500;
+          font-size: 1.25rem;
+        }
+
+        .logo {
+          font-style: italic;
+          font-size: 1.25rem;
+          font-family: var(--font-logo);
+          color: white;
+          opacity: 0.3;
+
+          display: none;
+          padding: 0;
+        }
+      }
+
+      .btn-containers {
+        opacity: 0;
+        margin-left: auto;
+
+        transition: 200ms;
+
+        * {
+          display: inline-block !important;
+        }
+      }
+    }
+  }
+}
+
+.vento-player.vjs-user-active {
+  .embed-overlay {
+    .header {
+      .btn-containers {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+// If not nested under vento player, it will be hidden
+
+.video-end-modal-container {
+  display: none;
+}
+
+.vento-player .video-end-modal {
+  display: inline-block;
+  z-index: 20;
+
+  * {
+    color: black;
+  }
+
+  .vjs-close-button {
+    display: none;
+  }
+
+  .vjs-modal-dialog-content {
+    @include flex-center;
+    padding: 0.5rem;
+
+    @include sm {
+      padding: 1rem;
+    }
+  }
+
+  &.visible {
+    .video-end-modal-container {
+      display: block;
+    }
+  }
+
+  &-container {
+    display: none;
+
+    max-width: 100%;
+    max-height: 100%;
+    padding: 0.5rem;
+
+    @include sm {
+      width: 80%;
+      padding: 1.5rem;
+    }
+
+    background-color: $orange-800;
+    border-radius: 15px;
+  }
+
+  &-content {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px 0px rgba($color: #000000, $alpha: 0.05);
+
+    padding: 0.5rem;
+
+    @include flex(column);
+    align-items: center;
+    gap: 0.5rem;
+
+    @include sm {
+      gap: 1rem;
+      padding: 1.5rem;
+    }
+  }
+
+  &-title {
+    font-size: 1.25rem;
+    line-height: 1.15;
+    text-align: center;
+    font-weight: 600;
+
+    @include sm {
+      font-size: 1.75rem;
+    }
+  }
+
+  &-description {
+    color: $neutral-400;
+    text-align: center;
+    font-size: 0.75rem;
+    line-height: 1;
+
+    @include sm {
+      font-size: 1rem;
+    }
+  }
+
+  &-ctaContainer {
+    @include flex-center(row);
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+
+    @include md {
+      flex-direction: column;
+    }
+  }
+
+  &-ctaBtn {
+    @include btn-base("small");
+    background-color: $primary-400;
+    display: flex !important;
+
+    @include sm {
+      @include btn-base();
+    }
+  }
+
+  .video-js &-declineBtn {
+    text-decoration: underline;
+    text-underline-offset: 2.5px;
+  }
+}
+
+.annotation-popup.vjs-modal-dialog {
+  background: rgba($color: #000000, $alpha: 0.5);
+
+  // Hide initially, display when '.visible' class is added
+  display: none;
+  * {
+    color: black;
+  }
+
+  &.visible {
+    display: flex !important;
+
+    .annotation-popup-content {
+      display: flex;
+    }
+  }
+
+  .vjs-close-button {
+    display: none;
+  }
+}
+
+.annotation-popup-content {
+  display: none;
+  position: absolute;
+  bottom: 2rem;
+  left: 1rem;
+
+  .annotation-user-icon {
+    border-radius: 999px;
+    width: 3rem;
+    height: 3rem;
+
+    @include sm {
+      width: 6rem;
+      height: 6rem;
+    }
+  }
+
+  .annotation-chatbubble {
+    position: absolute;
+
+    left: 120%;
+    bottom: 0px;
+    width: 17.5rem;
+    max-height: 10rem;
+
+    background: white;
+    border-radius: 10px;
+    padding: 1rem;
+
+    @include flex(column);
+
+    @include sm {
+      bottom: 100%;
+      left: 120%;
+      width: 25rem;
+
+      font-size: 1.05rem;
+    }
+
+    > * {
+      color: black;
+    }
+
+    button {
+      @include btn-base("small");
+      background-color: $primary-400;
+      border-radius: 5px;
+      margin-top: 0.75rem;
+
+      align-self: flex-end;
+    }
+
+    &-text {
+      white-space: pre-line;
+      line-height: 1.15;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 10px;
+      display: none;
+
+      border-left: 9px solid #fff;
+      border-right: 13px solid transparent;
+      border-top: 11px solid #fff;
+      border-bottom: 6px solid transparent;
+
+      @include sm {
+        display: block;
+      }
+    }
+  }
+
+  &.visible {
+    .annotation-popup-content {
+      display: flex;
+    }
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; 
+  background-color: #404040;
+  opacity: 75%;
+  display: flex;
+  justify-content: center;
+  display: none;
+  align-items: center;
+  font-size: 20px;
+  padding: 20px 50px;
+  
+  &.visible {
+    display: flex;
+  }
+
+    .overlayContent{
+      color: white;
+      align-self: center;
+      margin: auto;
+      font-size: 57px;
+      font-weight: lighter;
+      font-size: clamp(24px, 5vw, 57px);
+      text-align: center;
+      white-space: normal;
+      word-wrap: break-word;
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      max-width: 90%;
+    }
+
+    .link-text {
+      color:white !important;
+    }
+
+    .overlayContentSkip {
+      color:white;
+      display: none;
+      align-self: flex-end;
+      justify-content: center;
+      align-items: center;
+      font-weight: lighter;
+      margin-bottom: 30px;
+
+      &.visible {
+        display: flex;
+      }
+    }
+    .overlayContentRewatch {
+      color:white;
+      display: none;
+      align-self: flex-end;
+      justify-content: center;
+      align-items: center;
+      font-weight: lighter;
+      margin-bottom: 35px;
+
+      &.visible {
+        display: flex;
+      }
+    }
+}

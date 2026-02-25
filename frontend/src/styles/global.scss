@@ -1,0 +1,542 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+:root {
+  --padding: 1.25rem;
+  /* Desktop equivalent of Next.js font variable `--font-logo` */
+  --font-logo: "Shrikhand", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Helvetica Neue", Arial, sans-serif;
+
+  @media (min-width: $md) {
+    --padding: 4rem;
+  }
+}
+
+// Embed page
+html.embed,
+.embed body {
+  height: 100% !important;
+  width: 100%;
+}
+
+html,
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+}
+
+*,
+button,
+input,
+optgroup,
+select,
+textarea {
+  box-sizing: border-box;
+  font-size: 100%;
+
+  font-family: var(--font-base), system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+  color: $neutral-100;
+  margin: 0px;
+  padding-inline-start: 0px;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+h1 {
+  line-height: 1.25;
+  font-size: 2rem;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.grecaptcha-badge {
+  visibility: hidden;
+}
+
+.hidden {
+  display: none;
+}
+
+.first-heading-toast {
+  @include flex;
+  align-items: center;
+
+  > svg {
+    margin: 0 0.25rem;
+  }
+}
+
+.backgroundCurves {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.drag-cursor-tip {
+  color: white;
+
+  @include flex;
+  align-items: center;
+
+  .cursor {
+    position: relative;
+
+    width: 1.5px;
+    height: 30px;
+    background-color: $red-400;
+
+    margin: 0 0.5rem;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      width: 0.4rem;
+      height: 0.4rem;
+      border-radius: 999px;
+
+      background-color: $red-400;
+    }
+
+    &::before {
+      top: 0;
+    }
+
+    &::after {
+      bottom: 0;
+    }
+  }
+}
+.upgradeModalRoot {
+  z-index: 999999999 !important;
+
+  & .mantine-Modal-modal {
+    border-radius: 30px;
+    padding: 0px;
+  }
+  .cnfrmBtn {
+    @include btn-base(large);
+    background-color: $primary-400;
+    width: 100%;
+    cursor: pointer;
+
+    &:hover {
+      filter: brightness(0.9);
+      transition: 200ms;
+    }
+
+    &--delete {
+      background-color: $red-400;
+      color: white;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+.vento-modal {
+  z-index: 999999999 !important;
+
+  & .mantine-Modal-modal {
+    border-radius: 15px;
+    max-width: 30rem;
+  }
+
+  &.invite-users .mantine-Modal-modal {
+    max-width: 50rem;
+  }
+
+  &.recording-selection .mantine-Modal-modal {
+    max-width: 80rem;
+  }
+
+  &.admin-billing .mantine-Modal-modal {
+    max-width: 30rem;
+  }
+
+  & .mantine-Modal-header {
+    align-items: flex-start;
+  }
+
+  .mantine-Text-root.mantine-Modal-title {
+    font-weight: 500;
+    font-size: 1.5rem;
+  }
+
+  .cta-container {
+    @include flex-center;
+    margin-top: 1rem;
+    gap: 1rem;
+
+    > button {
+      flex-grow: 1;
+      flex-basis: 0;
+      min-width: 7.5rem;
+
+      @include btn-base;
+      white-space: nowrap;
+
+      &.no-grow {
+        flex-grow: 0;
+        flex-basis: auto;
+      }
+    }
+
+    .gotIt-btn,
+    .confirm-btn {
+      @include btn-base;
+      background-color: $primary-400;
+      flex: 1;
+      cursor: pointer;
+
+      &:hover {
+        filter: brightness(0.9);
+        transition: 200ms;
+      }
+
+      &--delete {
+        background-color: $red-400;
+        color: white;
+        &:disabled {
+          cursor: not-allowed;
+        }
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    .gotIt-btn {
+      margin-bottom: 16px;
+    }
+
+    .upgradePlan-btn {
+      background-color: $orange-400 !important;
+    }
+    .cancel-btn {
+      background-color: $neutral-800;
+
+      &:disabled {
+        opacity: 0.5;
+        background-color: $neutral-600;
+        cursor: not-allowed;
+      }
+    }
+    .cancel-btn:hover:not(:disabled) {
+      background-color: $neutral-600;
+      transition: 200ms;
+    }
+  }
+
+  &--settings {
+    & .mantine-Modal-modal {
+      border-radius: 15px;
+      max-width: 100%;
+      width: 40rem;
+    }
+
+    .record-init-menu {
+      width: 100% !important;
+    }
+
+    .done-btn {
+      @include btn-base;
+      background-color: $primary-400;
+      margin-right: 0.5rem;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  &--password {
+    form {
+      @include flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+
+  &--move-to-folder {
+    & .mantine-Modal-modal {
+      border-radius: 15px;
+      width: 30rem;
+    }
+
+    .loading {
+      @include flex-center;
+      padding-block: 1rem;
+    }
+
+    .create-new-btn {
+      @include btn-base("small");
+      background-color: $neutral-600;
+      padding-block: 0.25rem;
+    }
+
+    .folder-list {
+      @include flex(column);
+      gap: 0.5rem;
+      list-style: none;
+      overflow: auto;
+      max-height: 25rem;
+      margin: 1rem 0rem;
+
+      > li > div[role="button"] {
+        @include flex;
+        align-items: center;
+        width: 100%;
+        gap: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover,
+        &.selected {
+          background-color: $primary-600;
+          transition: 200ms;
+        }
+
+        > svg {
+          flex-shrink: 0;
+        }
+
+        .folder-name {
+          min-width: 0px;
+          text-align: left;
+        }
+      }
+    }
+
+    .create-folder-prompt {
+      a {
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+    }
+  }
+}
+
+.share-folder-modal-title {
+  font-weight: 500;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: medium;
+  color: black;
+  flex: 1;
+}
+
+.modalRoot {
+  background-color: transparent;
+  padding: 0px;
+}
+
+.modalContent {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 95vw;
+  max-height: 95vh;
+  overflow: auto;
+}
+
+.modalHeader {
+  height: fit-content;
+  padding: 2px;
+}
+
+.editor-dropdown-tooltip.mantine-Popover-dropdown {
+  border-radius: 15px;
+  border: none;
+  padding: 1.75rem;
+
+  > * + * {
+    margin-top: 1rem;
+  }
+
+  .mantine-Popover-arrow {
+    right: 14px !important;
+    bottom: -3px !important;
+    border: none;
+  }
+
+  .item {
+    h4 {
+      font-family: var(--font-base);
+      font-weight: 400;
+      margin-bottom: 0.25rem;
+    }
+    p {
+      line-height: 1.15;
+      color: $neutral-400;
+      font-size: 0.85rem;
+    }
+  }
+}
+
+.transcript-edit-dropdown {
+  .input {
+    @include flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    > button {
+      font-size: 0.85rem;
+      color: $primary-200;
+    }
+  }
+
+  .action {
+    margin-top: 0.5rem;
+
+    @include flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+
+    .update {
+      @include btn-base("small");
+      background-color: $primary-600;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+  }
+}
+
+.timeline-btn,
+.video-js button.timeline-btn {
+  @include flex-center;
+  padding: 0.25rem;
+  position: absolute;
+
+  left: 0;
+  bottom: 100%;
+  margin-bottom: 0.75rem;
+
+  border-radius: 5px;
+  background-color: white;
+
+  svg {
+    fill: black;
+  }
+
+  path {
+    display: inline-block;
+    width: 2rem;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    border-top: 5px solid white;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+  }
+}
+
+.timer-btn {
+  flex-shrink: 0;
+  background-color: white;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.timer-dropdown {
+  border-radius: 10px;
+
+  ul,
+  ol {
+    list-style: none;
+    @include flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+
+    button {
+      width: 3.5rem;
+      height: 2.5rem;
+      padding: 0.25rem;
+      background-color: $neutral-800;
+      border-radius: 5px;
+
+      &.btn-active {
+        border: 2px solid $primary-400;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+#camera-notif-modal {
+  .mantine-Modal-inner {
+    height: fit-content;
+    margin: auto;
+  }
+}
+
+// Summary Insert Link Modal Styling
+.rdw-link-modal {
+  overflow-y: auto !important;
+  height: 230px;
+}
+
+// Summary Link Styling
+a span[data-text="true"] {
+  color: blue;
+}
+
+.error {
+  text-align: center;
+  color: red;
+  margin-top: 2px;
+}
+
+.modal-btn {
+  transition: all 0.2s ease;
+}
+
+.modal-btn:focus {
+  outline: none;
+  box-shadow: 0 0 1px 1px rgba(0, 255, 0, 0.5);
+  transform: scale(1.05);
+}
