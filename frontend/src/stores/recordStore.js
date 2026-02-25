@@ -37,6 +37,7 @@ export const useRecordStore = create((set, get) => ({
   isMicDisconnected: false,
   canMaxRecordingTimeEventOccured: false,
   currentRecording: undefined,
+  finalVideoUrl: undefined, // Set when server sends onVideoUpdated (used by RecordPreview)
   waitingForNewRecording: false,
   blurProgress: undefined,
   mediaRecorder: undefined,
@@ -455,6 +456,7 @@ export const useRecordStore = create((set, get) => ({
           });
           set({
             currentRecording: data,
+            finalVideoUrl: data.videoUrl || null,
             waitingForNewRecording: false,
           });
 
@@ -752,6 +754,7 @@ export const useRecordStore = create((set, get) => ({
       mediaRecorder: undefined,
       currentRecordingTime: get().maxRecordingTime,
       currentRecording: undefined,
+      finalVideoUrl: undefined,
       recordedTime: 0,
       startLock: false,
       openEditorAfterRecording: true,

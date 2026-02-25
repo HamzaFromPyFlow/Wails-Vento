@@ -31,22 +31,6 @@ function RecordPreview() {
       <div className="rounded-lg overflow-hidden bg-black">
         <VideoPlayer options={options} />
       </div>
-      <div className="mt-4 flex gap-3 justify-end">
-        <button
-          type="button"
-          className="px-4 py-2 rounded-lg bg-black text-white hover:bg-gray-900"
-          onClick={() => navigate('/editor')}
-        >
-          Open in editor
-        </button>
-        <button
-          type="button"
-          className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50"
-          onClick={resetStateForNewRecording}
-        >
-          Discard
-        </button>
-      </div>
     </div>
   );
 }

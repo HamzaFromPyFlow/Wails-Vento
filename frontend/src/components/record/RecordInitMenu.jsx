@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Loader } from '@mantine/core';
 import { CgRecord } from 'react-icons/cg';
 import { showNotification } from '@mantine/notifications';
@@ -16,6 +17,7 @@ import RecordPreview from './RecordPreview';
 // This matches the structure and behavior of the original.
 
 function RecordInitMenu() {
+  const navigate = useNavigate();
   const { ventoUser, setVentoUser, setRecordingNo, recordingNo } = useAuth();
   const { recordingState, setRecordingState, lastDisplayType, setLastDisplayType, mediaRecorder, startRecording } =
     useRecordStore((state) => ({
@@ -206,19 +208,23 @@ function RecordInitMenu() {
   }
 
   /**
-   * This is the function that is called when user clicks on the finish button.
-   * @param redirectToEditor - If true, open the editor component after recording is done.
+   * Called when user clicks Save Video (finishAndSave=true) or Stop/Delete (finishAndSave=false).
+   * @param finishAndSave - If true, stop and keep recording for preview/editor; if false, discard.
    */
   async function onCameraRecordingStop(finishAndSave = true) {
     const event = new CustomEvent('VENTO_EDITOR_STOP');
     document.dispatchEvent(event);
 
-    // Stop recording if we are
-    await useRecordStore.getState().stopRecording();
+    const store = useRecordStore.getState();
+    await store.stopRecording();
 
-    // For now we treat both save/delete the same at store level.
-    // The preview component decides what to do next (open editor or discard).
-    setRecordingState('none');
+    if (finishAndSave) {
+      setRecordingState('none');
+      navigate('/recordings');
+    } else {
+      // Discard: reset store and delete recording on server
+      store.resetStateForNewRecording(false, true);
+    }
     setPreparing(false);
   }
 
@@ -231,43 +237,43 @@ function RecordInitMenu() {
         </p>
       )}
 
-      {/* InputSettings wrapper*/}
-      <div className="max-w-[650px] mx-auto px-4 md:px-6 py-4 md:py-6">
-        <InputSettings onResolutionClick={() => console.log('Resolution click - modal coming soon')}>
-          {isCameraRecording ? (
-            <CameraOnlyRecordingToolbar
-              onPause={onCameraRecordingPause}
-              onStop={(finishAndSave) => onCameraRecordingStop(!finishAndSave)}
-            />
-          ) : isRecordingOrPaused ? (
-            <p className="text-center text-gray-500 py-2">Recording in progress — use the controls below to pause or stop.</p>
-          ) : (
-            <button
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#68E996] py-3 text-base font-medium text-black shadow-md hover:bg-[#4fd47f] disabled:opacity-60"
-              id="startRecordingBtn"
-              onClick={startRecord}
-              disabled={preparing}
-              type="button"
-            >
-              {preparing ? (
-                <Loader size="sm" color="#fff" />
-              ) : (
-                <>
-                  Start Recording
-                  <CgRecord size="1.25rem" />
-                </>
-              )}
-            </button>
-          )}
-        </InputSettings>
-      </div>
+      {/* InputSettings wrapper — hide card during screen/selection recording; keep for camera mode */}
+      {(isCameraRecording || !isRecordingOrPaused) && (
+        <div className="max-w-[650px] mx-auto px-4 md:px-6 py-4 md:py-6">
+          <InputSettings onResolutionClick={() => console.log('Resolution click - modal coming soon')}>
+            {isCameraRecording ? (
+              <CameraOnlyRecordingToolbar
+                onPause={onCameraRecordingPause}
+                onStop={(finishAndSave) => onCameraRecordingStop(finishAndSave)}
+              />
+            ) : (
+              <button
+                className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#68E996] py-3 text-base font-medium text-black shadow-md hover:bg-[#4fd47f] disabled:opacity-60"
+                id="startRecordingBtn"
+                onClick={startRecord}
+                disabled={preparing}
+                type="button"
+              >
+                {preparing ? (
+                  <Loader size="sm" color="#fff" />
+                ) : (
+                  <>
+                    Start Recording
+                    <CgRecord size="1.25rem" />
+                  </>
+                )}
+              </button>
+            )}
+          </InputSettings>
+        </div>
+      )}
 
       {/* Global recording toolbar (status + pause/delete) — show for screen, screencam, and camera */}
       {isRecordingOrPaused && (
         <div className="mt-4 flex justify-center">
           <Toolbar
             onPause={onCameraRecordingPause}
-            onStop={(finishAndSave) => onCameraRecordingStop(!finishAndSave)}
+            onStop={(finishAndSave) => onCameraRecordingStop(finishAndSave)}
           />
         </div>
       )}

@@ -30,6 +30,8 @@ export default function InputSettings({ children, onResolutionClick }) {
   }));
 
   const isCameraRecording = recordingState === 'recording-cam';
+  const isRecordingOrPaused =
+    recordingState === 'recording' || recordingState === 'recording-cam' || recordingState === 'paused';
   const previewRef = useRef(null);
   const cameraPreviewRef = useRef(null);
   const cameraVideoRef = useRef(null); // Video element for camera-only mode
@@ -354,8 +356,8 @@ export default function InputSettings({ children, onResolutionClick }) {
 
   return (
     <div className="rounded-[32px] border border-[#F3F3F3] bg-white shadow-[0_22px_80px_rgba(0,0,0,0.06)] p-4 md:p-6 flex flex-col gap-3 w-full">
-      {/* Tabs - only show when not recording */}
-      {!isCameraRecording && (
+      {/* Tabs - hide when any recording or paused (screen, screencam, or camera) */}
+      {!isRecordingOrPaused && (
         <Tabs
           value={mode}
           onChange={(value) => handleModeChange(value)}
@@ -473,8 +475,12 @@ export default function InputSettings({ children, onResolutionClick }) {
           </div>
         )}
 
-        {/* Controls OVERLAYED on preview - for all modes when not recording */}
-        {!isCameraRecording && (
+        {/* Controls OVERLAYED on preview - hide when recording/paused; show only children when recording */}
+        {isRecordingOrPaused ? (
+          <div className="absolute bottom-0 left-0 right-0 p-4 flex flex-col gap-2 z-10">
+            <div className="mt-1">{children}</div>
+          </div>
+        ) : (
           <div className="absolute bottom-0 left-0 right-0 p-4 flex flex-col gap-2 z-10">
             {/* Camera selection row
                 - In camera mode: shows text only on hover over the preview
@@ -536,7 +542,8 @@ export default function InputSettings({ children, onResolutionClick }) {
         )}
       </div>
 
-      {/* Bottom controls row */}
+      {/* Bottom controls row - hide when recording/paused */}
+      {!isRecordingOrPaused && (
       <div className="mt-3 flex items-center justify-between gap-4 text-xs md:text-sm">
         {/* Recording options tooltip + menu (desktop clone of web behavior, simplified) */}
         <Tooltip label="Recording Options" opened={toolTipOpened}>
@@ -630,9 +637,10 @@ export default function InputSettings({ children, onResolutionClick }) {
           <span>720p</span>
         </button>
       </div>
+      )}
 
-      {/* Terms text – show on the same screen when not recording */}
-      {recordingState !== 'recording-cam' && (
+      {/* Terms text – hide when recording or paused */}
+      {!isRecordingOrPaused && (
         <p className="mt-2 text-xs text-center text-gray-500">
           By clicking "Start Recording", you agree to our{' '}
           <a href="#/policy?content=terms-of-service" className="text-[#68E996]">
