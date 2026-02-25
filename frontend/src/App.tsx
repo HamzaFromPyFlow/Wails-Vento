@@ -1,12 +1,7 @@
 import { useEffect } from "react";
 import { HashRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { MantineProvider } from "@mantine/core";
-import { onAuthStateChanged, type Auth } from "firebase/auth";
-import * as firebaseLib from "./lib/firebase";
-
-const firebaseAuth = firebaseLib.auth as Auth | undefined;
 import { useAuth } from "./stores/authStore";
-import webAPI from "./lib/webapi";
 import Landing from "./pages/Landing";
 import RecordingsPage from "./pages/recordings/Recordings.jsx";
 import FolderPage from "./pages/recordings/FolderPage.jsx";
@@ -37,31 +32,13 @@ function RequireAuth({ children }: { children: React.ReactNode }) {
 }
 
 function App() {
-  const setVentoUser = useAuth((s) => s.setVentoUser);
+  const { initializeAuth } = useAuth();
 
   useEffect(() => {
-    if (!firebaseAuth) return;
-    return onAuthStateChanged(firebaseAuth, async (firebaseUser) => {
-      if (!firebaseUser) {
-        setVentoUser(null);
-        return;
-      }
-      try {
-        // @ts-expect-error - userGet expects uid when backend is wired
-        const ventoUser = await webAPI.user.userGet(firebaseUser.uid);
-        setVentoUser(ventoUser || null);
-      } catch {
-        setVentoUser({
-          id: firebaseUser.uid,
-          uid: firebaseUser.uid,
-          email: firebaseUser.email,
-          displayName: firebaseUser.displayName,
-          name: firebaseUser.displayName || firebaseUser.email,
-          profilePhotoUrl: firebaseUser.photoURL,
-        });
-      }
-    });
-  }, [setVentoUser]);
+    // Initialize Firebase auth listener (mirrors VentoDesktop behavior)
+    const cleanup = initializeAuth();
+    return cleanup;
+  }, [initializeAuth]);
 
   return (
     <MantineProvider defaultColorScheme="dark">

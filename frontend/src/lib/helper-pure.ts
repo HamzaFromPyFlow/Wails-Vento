@@ -160,26 +160,32 @@ export function obscureFormatEmail(email: string): string {
 }
 
 /**
- * This function should be used to whenever we're generating a URL for a tags.
- * It ensures that utm parameters are always added to the URL.
- * @param href
- * @param searchParams - URLSearchParams or Record<string, any>
- * @returns
+ * Generate URL with UTM parameters preserved.
+ * Desktop app uses HashRouter, so we optionally add `#` for raw hrefs.
+ *
+ * @param href - Path (e.g. '/pricing') or full URL.
+ * @param searchParams - URLSearchParams or plain object of params.
+ * @param addHash - Whether to prefix `#` (for window.location-style links).
  */
 export function generateUrl(
   href: string,
-  searchParams?: URLSearchParams | Record<string, any> | null
-) {
+  searchParams?: URLSearchParams | Record<string, any> | null,
+  addHash: boolean = false
+): string {
+  // If it's an external URL (http/https), return as-is without processing
+  if (href.startsWith('http://') || href.startsWith('https://')) {
+    return href;
+  }
+
   const filteredParams = new URLSearchParams();
 
   // Keys that should be kept in the URL.
   const flaggedKeys = ["utm_", "referrer", "source"];
 
   // If searchParams.forEach is defined, it is a URLSearchParams object (or ReadonlyURLSearchParams)
-  if (searchParams && typeof searchParams.forEach === 'function') {
+  if (searchParams && typeof (searchParams as any).forEach === 'function') {
     try {
-      searchParams.forEach((value: any, key: any) => {
-        // Ensure key is a string before calling includes
+      (searchParams as URLSearchParams).forEach((value: any, key: any) => {
         const keyStr = String(key);
         if (flaggedKeys.some((k) => keyStr.includes(k))) {
           filteredParams.append(keyStr, String(value));
@@ -197,8 +203,12 @@ export function generateUrl(
     });
   }
 
+  // For HashRouter with Link components, don't add # prefix (HashRouter handles it)
+  // For window.location.href, add # prefix
+  const finalHref = addHash ? (href.startsWith('#') ? href : `#${href}`) : href;
+
   return (
-    href +
+    finalHref +
     (Array.from(filteredParams).length > 0
       ? `?${decodeURIComponent(filteredParams.toString())}`
       : "")

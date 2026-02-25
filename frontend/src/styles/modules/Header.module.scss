@@ -11,7 +11,7 @@
 
   padding: 0.5rem 50px;
 
-  margin: 10px auto;
+  margin: auto;
   width: 100%;
   max-width: $max-width;
 
@@ -105,7 +105,8 @@
     font-weight: 400;
     font-size: 24px;
     line-height: 37px;
-    color: rgb(65, 50, 69);
+    // Light text for dark header background
+    color: $neutral-700;
     padding: 0;
 
     @media screen and (max-width: $md) {
@@ -259,7 +260,8 @@
                 text-overflow: ellipsis;
                 overflow: hidden;
                 font-size: medium;
-                color: black;
+                // Use light text color for dark theme
+                color: $neutral-700;
                 
                 @media  screen and (max-width: $md) {
                   max-width: 300px;

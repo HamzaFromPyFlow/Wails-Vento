@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useLocation, Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { isBrowser, isSupportedBrowser } from '../../lib/helper-pure';
-import { generateUrl } from '../../lib/helper-pure';
+import { isBrowser, isSupportedBrowser, generateUrl } from '../../lib/helper-pure';
 import { useRedirectAuthUrl, useSignUpRedirectAuthUrl } from '../../lib/hooks';
 import { logClientEvent } from '../../lib/misc';
 import { useAuth } from '../../stores/authStore';
@@ -30,7 +29,8 @@ export default function Header({
   const redirectUrl = useRedirectAuthUrl();
   const signUpRedirectUrl = useSignUpRedirectAuthUrl();
   const homeUrl = ventoUser ? '/recordings' : '/';
-  const canRecord = !isBrowser() || isSupportedBrowser();
+  // Desktop app always supports recording – no browser gating needed
+  const canRecord = true;
   const pathname = location.pathname;
   const [isModalOpen, setIsModalOpen] = useState(false);
 
