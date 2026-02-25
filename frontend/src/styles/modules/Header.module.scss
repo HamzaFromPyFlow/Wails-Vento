@@ -8,6 +8,7 @@
   align-items: center;
   justify-content: space-between;
   z-index: 10;
+  background-color: $neutral-800;
 
   padding: 0.5rem 50px;
 
@@ -105,8 +106,7 @@
     font-weight: 400;
     font-size: 24px;
     line-height: 37px;
-    // Light text for dark header background
-    color: $neutral-700;
+    color: $neutral-100;
     padding: 0;
 
     @media screen and (max-width: $md) {

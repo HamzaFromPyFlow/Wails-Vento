@@ -42,7 +42,7 @@ function App() {
   }, [initializeAuth]);
 
   return (
-    <MantineProvider defaultColorScheme="dark">
+    <MantineProvider defaultColorScheme="light">
       <HashRouter>
         <Routes>
           <Route path="/" element={<HomeOrRedirect />} />
