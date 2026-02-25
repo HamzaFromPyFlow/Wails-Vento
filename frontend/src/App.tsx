@@ -5,7 +5,7 @@ import { useAuth } from "./stores/authStore";
 import Landing from "./pages/Landing";
 import RecordingsPage from "./pages/recordings/Recordings.jsx";
 import FolderPage from "./pages/recordings/FolderPage.jsx";
-import ViewRecording from "./pages/view/ViewRecording.jsx";
+import ViewRecordingPage from "./pages/view/ViewRecordingPage.jsx";
 import RecordNew from "./pages/record/Record.jsx";
 import EditorPage from "./pages/editor/Editor.jsx";
 import Profile from "./pages/profile/Profile.jsx";
@@ -57,7 +57,7 @@ function App() {
           <Route path="/auth/beta-no-access" element={<BetaNoAccessPage />} />
           <Route path="/recordings" element={<RequireAuth><RecordingsPage /></RequireAuth>} />
           <Route path="/recordings/folder/:folderId" element={<RequireAuth><FolderPage /></RequireAuth>} />
-          <Route path="/view/:id" element={<RequireAuth><ViewRecording /></RequireAuth>} />
+          <Route path="/view/:id" element={<RequireAuth><ViewRecordingPage /></RequireAuth>} />
           <Route path="/record/new" element={<RequireAuth><RecordNew /></RequireAuth>} />
           <Route path="/editor" element={<RequireAuth><EditorPage /></RequireAuth>} />
           <Route path="/profile" element={<RequireAuth><Profile /></RequireAuth>} />
