@@ -35,8 +35,11 @@ function RecordInitMenu() {
   const [preparing, setPreparing] = useState(false);
   const hideScreenNotification = Boolean(localStorage.getItem('hideScreenNotification'));
 
-  // If user is recording camera only
+  // If user is recording camera only (determines which in-slot controls to show)
   const isCameraRecording = recordingState === 'recording-cam';
+  // Any active recording or paused — show global stop/pause toolbar (screen, screencam, or camera)
+  const isRecordingOrPaused =
+    recordingState === 'recording' || recordingState === 'recording-cam' || recordingState === 'paused';
 
   // Debug: Log recording state changes
   React.useEffect(() => {
@@ -222,7 +225,7 @@ function RecordInitMenu() {
   return (
     <>
       {/* Prompt - only show when not recording */}
-      {recordingState !== 'recording-cam' && (
+      {!isRecordingOrPaused && (
         <p className="mb-3 text-base text-gray-700 text-center max-w-[800px] mx-auto px-4 md:px-6">
           An audio chime will play when recording starts! <strong>PS:</strong> Make sure your browser is up to date!
         </p>
@@ -236,6 +239,8 @@ function RecordInitMenu() {
               onPause={onCameraRecordingPause}
               onStop={(finishAndSave) => onCameraRecordingStop(!finishAndSave)}
             />
+          ) : isRecordingOrPaused ? (
+            <p className="text-center text-gray-500 py-2">Recording in progress — use the controls below to pause or stop.</p>
           ) : (
             <button
               className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#68E996] py-3 text-base font-medium text-black shadow-md hover:bg-[#4fd47f] disabled:opacity-60"
@@ -257,8 +262,8 @@ function RecordInitMenu() {
         </InputSettings>
       </div>
 
-      {/* Global recording toolbar (status + pause/delete) */}
-      {isCameraRecording && (
+      {/* Global recording toolbar (status + pause/delete) — show for screen, screencam, and camera */}
+      {isRecordingOrPaused && (
         <div className="mt-4 flex justify-center">
           <Toolbar
             onPause={onCameraRecordingPause}

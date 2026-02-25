@@ -774,6 +774,11 @@ export const useRecordStore = create((set, get) => ({
       });
     }
   },
+
+  /** Stop the current recording (mediaRecorder + socket/tracks). Used by Toolbar stop/pause flow. */
+  stopRecording: async () => {
+    stopCountdown();
+  },
 }));
 
 /**
@@ -801,27 +806,9 @@ async function startCountdown() {
       let elapsedTime = currentTime - startTime;
       const remainingCountdown = Math.max(0, countdownTime - elapsedTime);
 
-      /**
-       * Play the countdown audio when the countdown is less than 1000ms
-       */
+      // Timer audio commented out (timer.mp3 not in Wails assets — was 404 and caused pause)
       if (remainingCountdown <= 1000 && !playedAudio) {
-        console.log('[startCountdown] Playing countdown audio');
-        try {
-          playAudio('/assets/sound/timer.mp3', 0.5, () => {
-            console.log('[startCountdown] Audio finished');
-            audioDone = true;
-          });
-          // Set a timeout to mark audio as done if callback never fires (max 1 second)
-          setTimeout(() => {
-            if (!audioDone) {
-              console.warn('[startCountdown] Audio callback timeout, continuing anyway');
-              audioDone = true;
-            }
-          }, 1000);
-        } catch (err) {
-          console.warn('[startCountdown] Audio play failed, continuing anyway', err);
-          audioDone = true; // Continue even if audio fails
-        }
+        audioDone = true;
         playedAudio = true;
       }
 
