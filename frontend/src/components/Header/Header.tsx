@@ -49,7 +49,7 @@ export default function Header({
               alignItems: 'center',
               justifyContent: 'center',
               fontWeight: 'bold',
-              color: '#020617',
+              // color: '#020617',
               flexShrink: 0,
             }}
           >

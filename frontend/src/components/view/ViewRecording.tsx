@@ -10,10 +10,9 @@ import { AiFillLock } from "react-icons/ai";
 import { RiListCheck2 } from "react-icons/ri";
 import { MdOutlineDone, MdOutlineCancel } from "react-icons/md";
 import type Player from "video.js/dist/types/player";
-
 import Header from "../Header/Header";
 import VideoPlayer from "../../components/media/VideoPlayer";
-import RecordingItemDropdown from "../../components/dropdowns/RecordingItemDropdown";
+import RecordingItemDropdown from "../dropdowns/RecordingItemDropdown";
 import Summary from "./Summary";
 import TranscriptionTabPanel from "./TranscriptionTabPanel";
 import { isUserFreePlan } from "../../lib/payment-helper";
@@ -207,8 +206,10 @@ export default function ViewRecording() {
       }
 
       // Wait for the video to play for the first time
-      player.one("playing", async () => {
-        const seekBar = player
+      const anyPlayer = player as any;
+
+      anyPlayer.one?.("playing", async () => {
+        const seekBar = anyPlayer
           .getChild("ControlBar")
           ?.getChild("ProgressControl")
           ?.getChild("SeekBar")
@@ -222,7 +223,7 @@ export default function ViewRecording() {
 
           if (!annotationBtn || !seekBar) return;
 
-          const playerDuration = player.duration();
+          const playerDuration = anyPlayer.duration?.();
           if (playerDuration === undefined) return;
           const durationPercentage = annotation.timestamp / (playerDuration * 1000);
 
@@ -235,7 +236,7 @@ export default function ViewRecording() {
             e.preventDefault();
             annotation.viewed = false;
             setTimeout(() => {
-              player.currentTime(annotation.timestamp / 1000);
+              anyPlayer.currentTime?.(annotation.timestamp / 1000);
             }, 50);
           });
           seekBar.appendChild(annotationBtn);
@@ -251,7 +252,7 @@ export default function ViewRecording() {
 
           if (!ctaBtn || !seekBar) return;
 
-          const playerDuration = player.duration();
+          const playerDuration = anyPlayer.duration?.();
           if (playerDuration === undefined) return;
           const durationPercentage = cta.time / (playerDuration * 1000);
 
@@ -264,7 +265,7 @@ export default function ViewRecording() {
             e.preventDefault();
             cta.skipped = false;
             setTimeout(() => {
-              player.currentTime(cta.time / 1000);
+              anyPlayer.currentTime?.(cta.time / 1000);
             }, 50);
           });
           seekBar.appendChild(ctaBtn);
@@ -272,10 +273,10 @@ export default function ViewRecording() {
       });
 
       // Handle annotation popups during playback
-      player.on(
+      anyPlayer.on?.(
         "timeupdate",
         throttle(() => {
-          const playerCurrentTime = player.currentTime();
+          const playerCurrentTime = anyPlayer.currentTime?.();
           if (playerCurrentTime === undefined) return;
           const currentTime = Math.round(playerCurrentTime);
 
@@ -299,12 +300,12 @@ export default function ViewRecording() {
 
                 gotItBtn?.addEventListener("click", () => {
                   annotationPopup.classList.remove("visible");
-                  player.play();
+                  anyPlayer.play?.();
                   annotation.viewed = true;
                 });
 
                 annotationPopup.classList.add("visible");
-                player.pause();
+                anyPlayer.pause?.();
                 return;
               }
             }
@@ -329,12 +330,12 @@ export default function ViewRecording() {
                     : `https://${cta.linkCtaUrl}`;
 
                   ctaOverlay.classList.add("visible");
-                  player.pause();
+                  anyPlayer.pause?.();
                 }
 
                 const skipBtn = ctaOverlay.querySelector(".overlayContentSkip");
                 const rewatchBtn = ctaOverlay.querySelector(".overlayContentRewatch");
-                const playerDuration = player.duration();
+                const playerDuration = anyPlayer.duration?.();
                 const isCtaAtEnd = playerDuration !== undefined && Math.abs(cta.time / 1000 - playerDuration) <= 0.1;
 
                 if (!isCtaAtEnd && skipBtn && rewatchBtn) {
@@ -343,7 +344,7 @@ export default function ViewRecording() {
                   skipBtn.addEventListener("click", () => {
                     ctaOverlay.classList.remove("visible");
                     cta.skipped = true;
-                    player.play();
+                    anyPlayer.play?.();
                   });
                 }
                 if (isCtaAtEnd && rewatchBtn && skipBtn) {
@@ -351,8 +352,8 @@ export default function ViewRecording() {
                   rewatchBtn.classList.add("visible");
                   rewatchBtn.addEventListener("click", () => {
                     ctaOverlay.classList.remove("visible");
-                    player.currentTime(0);
-                    player.play();
+                    anyPlayer.currentTime?.(0);
+                    anyPlayer.play?.();
                   });
                 }
               }
@@ -641,12 +642,18 @@ export default function ViewRecording() {
           >
             <Tabs.List>
               {videoChapterHeadings.length > 0 && (
-                <Tabs.Tab value="headings" icon={<RiListCheck2 size={17} />}>
+                <Tabs.Tab
+                  value="headings"
+                  leftSection={<RiListCheck2 size={17} />}
+                >
                   Chapters
                 </Tabs.Tab>
               )}
               {showTranscriptionTab && (
-                <Tabs.Tab value="transcription" icon={<CgTranscript size={17} />}>
+                <Tabs.Tab
+                  value="transcription"
+                  leftSection={<CgTranscript size={17} />}
+                >
                   Transcription
                 </Tabs.Tab>
               )}
@@ -658,10 +665,11 @@ export default function ViewRecording() {
                   <li key={i}>
                     <button
                       onClick={() => {
-                        const paused = playerRef.current?.paused();
-                        playerRef.current?.play();
-                        playerRef.current?.currentTime(heading.timestamp / 1000);
-                        if (paused) playerRef.current?.pause();
+                        const vjs = playerRef.current as any;
+                        const wasPaused = vjs?.paused?.();
+                        vjs?.play?.();
+                        vjs?.currentTime?.(heading.timestamp / 1000);
+                        if (wasPaused) vjs?.pause?.();
                       }}
                     >
                       <span className={styles.timestamp}>
