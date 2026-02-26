@@ -127,16 +127,18 @@ export default function TranscriptionTabPanel({
   useEffect(() => {
     if (!player || !paragraphs) return;
 
-    player.ready(() => {
+    const vjs = player as any;
+
+    vjs?.ready?.(() => {
       let savedElementOffset = 0;
       let lastScrolledParagraphIndex = 0;
 
-      player.on(
+      vjs?.on?.(
         "timeupdate",
         throttle(() => {
           if ((paragraphs.length ?? 0) === 0) return;
 
-          const currentTime = player.currentTime();
+          const currentTime = vjs?.currentTime?.();
           if (currentTime === undefined) return;
 
           const inversedLatestParagraphIndex = paragraphs
@@ -210,10 +212,11 @@ export default function TranscriptionTabPanel({
                 <li className={styles.inactive} key={i} data-index={i}>
                   <button
                     onClick={() => {
-                      const paused = player?.paused();
-                      player?.play();
-                      player?.currentTime(paragraph.start);
-                      if (paused) player?.pause();
+                      const vjs = player as any;
+                      const paused = vjs?.paused?.();
+                      vjs?.play?.();
+                      vjs?.currentTime?.(paragraph.start);
+                      if (paused) vjs?.pause?.();
                     }}
                   >
                     <span className={styles.timestamp}>
